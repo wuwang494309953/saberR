@@ -9,6 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
+    <modules>
+        <module>saber-auth-api</module>
+    </modules>
     <artifactId>saber-auth</artifactId>
 
     <properties>
@@ -20,6 +23,13 @@
     </properties>
 
     <dependencies>
+        <!-- 依赖自己的包 -->
+        <dependency>
+            <groupId>fgo.saber</groupId>
+            <artifactId>saber-log</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
@@ -28,11 +38,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>1.3.2</version>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -44,11 +50,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>fgo.saber</groupId>
-            <artifactId>saber-commons</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>

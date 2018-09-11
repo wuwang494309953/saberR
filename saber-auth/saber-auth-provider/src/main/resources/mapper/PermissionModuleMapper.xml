@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fgo.saber.auth.provider.dao.PermissionModuleMapper">
+  <resultMap id="BaseResultMap" type="fgo.saber.auth.provider.model.entity.PermissionModule">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="permission_module_id" jdbcType="BIGINT" property="permissionModuleId" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="seq" jdbcType="INTEGER" property="seq" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    permission_module_id, parent_id, name, operate_ip, operate_time, operator, remark, 
+    seq, status
+  </sql>
+</mapper>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fgo.saber.auth.provider.dao.UserRoleMapper">
+  <resultMap id="BaseResultMap" type="fgo.saber.auth.provider.model.entity.UserRole">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="user_role_id" jdbcType="BIGINT" property="userRoleId" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="operate_ip" jdbcType="VARCHAR" property="operateIp" />
+    <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime" />
+    <result column="operator" jdbcType="VARCHAR" property="operator" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    user_role_id, role_id, user_id, operate_ip, operate_time, operator
+  </sql>
+</mapper>
