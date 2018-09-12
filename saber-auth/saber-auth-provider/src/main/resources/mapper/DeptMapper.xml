@@ -20,4 +20,15 @@
     -->
     dept_id, name, operate_ip, operate_time, operator, parent_id, remark, seq
   </sql>
+  <select id="findDeptsWithParentId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sb_dept
+    <where>
+
+    </where>
+    where dept_id = #{parentId}
+
+  </select>
+
 </mapper>

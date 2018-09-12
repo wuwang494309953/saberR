@@ -22,7 +22,7 @@ public class DeptController {
     private DeptCloudService deptCloudService;
 
     @GetMapping("get_dept")
-    public Map findDeptWithId(@NotNull Long deptId) {
+    public Map findDeptWithId(Long deptId) {
         return deptCloudService.findDeptWithId(deptId).toMap();
     }
 

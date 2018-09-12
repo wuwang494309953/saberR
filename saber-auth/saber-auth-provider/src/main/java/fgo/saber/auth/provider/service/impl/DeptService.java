@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 /**
  * @author zq
  * @Date 2018/9/11
@@ -20,6 +22,10 @@ public class DeptService extends AbstBaseService<Dept> {
     @Override
     public Mapper<Dept> getDao() {
         return deptMapper;
+    }
+
+    public List<Dept> getDeptsWithParentId(Long parentId) {
+        return deptMapper.findDeptsWithParentId(parentId);
     }
 
 }
