@@ -1,0 +1,11 @@
+server:
+  port: 8502
+spring:
+  application:
+    name: saber-auth-controller
+  cloud:
+    consul:
+      port: 8500
+      host: localhost
+      discovery:
+        register: false

@@ -1,6 +1,7 @@
 package fgo.saber.util;
 
-import java.util.List;
+import fgo.saber.util.exception.CommonUtilException;
+import org.apache.commons.beanutils.PropertyUtils;
 
 /**
  * @author zq
@@ -12,9 +13,9 @@ public class BeanUtil {
         T entity;
         try {
             entity = classType.getConstructor(new Class[] {}).newInstance();
-            BeanUtils.copyProperties(source, entity);
+            PropertyUtils.copyProperties(entity, source);
         } catch (Exception e) {
-            throw new CommonBeanException("对象转化时发生一个异常", e);
+            throw new CommonUtilException("对象转化时发生一个异常", e);
         }
         return entity;
 

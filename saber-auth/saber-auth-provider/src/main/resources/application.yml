@@ -20,3 +20,4 @@ mapper:
   mappers: tk.mybatis.mapper.common.Mapper
   not-empty: true
 
+

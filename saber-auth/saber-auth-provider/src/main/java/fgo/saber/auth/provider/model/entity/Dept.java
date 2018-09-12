@@ -3,6 +3,7 @@ package fgo.saber.auth.provider.model.entity;
 import fgo.saber.common.mybatis.ext.SnowFlakeId;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tk.mybatis.mapper.annotation.KeySql;
 
 import java.util.Date;
