@@ -14,7 +14,7 @@ import java.util.List;
  * @Date 2018/9/11
  */
 @Service
-public class DeptService extends AbstBaseService<Dept> {
+public class DeptServiceImpl extends AbstBaseService<Dept> {
 
     @Autowired
     private DeptMapper deptMapper;

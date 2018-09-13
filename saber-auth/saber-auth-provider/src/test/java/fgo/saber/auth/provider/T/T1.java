@@ -6,6 +6,7 @@ import fgo.saber.auth.provider.model.entity.Dept;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 
@@ -16,9 +17,15 @@ public class T1 extends ProviderApplicationTests {
     private DeptMapper deptMapper;
 
     @Test
+    @Transactional
     public void t1() {
-        Dept dept = deptMapper.selectByPrimaryKey(1L);
-        System.out.printf(dept.getName());
+        Dept dept = deptMapper.selectByPrimaryKey(236851946827382784L);
+        Dept dept1 = deptMapper.selectByPrimaryKey(236851946827382784L);
+        Dept dept2 = deptMapper.selectByPrimaryKey(236851946827382784L);
+
+        log.info("查询对象: {}", dept);
+        log.info("查询对象: {}", dept1);
+        log.info("查询对象: {}", dept2);
     }
 
     @Test

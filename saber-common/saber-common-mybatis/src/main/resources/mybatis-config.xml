@@ -5,7 +5,7 @@
 
 <configuration>
     <!--根据需要加入有关配置-->
-    <plugins>
-        <plugin interceptor="fgo.saber.common.mybatis.ext.MybatisIdInterceptor"></plugin>
-    </plugins>
+    <!--<plugins>-->
+        <!--<plugin interceptor="fgo.saber.common.mybatis.ext.MybatisIdInterceptor"></plugin>-->
+    <!--</plugins>-->
 </configuration>

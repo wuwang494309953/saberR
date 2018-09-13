@@ -4,6 +4,7 @@ import fgo.saber.auth.api.dto.DeptDto;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
@@ -21,12 +22,22 @@ public interface DeptCloudService {
      * @param deptId
      * @return
      */
-    @GetMapping("/dept/get_dept")
+    @GetMapping("/dept/get")
     JsonResult<DeptDto> findDeptWithId(@NotNull @RequestParam(name = "deptId") Long deptId);
 
+    /**
+     * 根据父id寻找子部门
+     * @param parentId
+     * @return
+     */
     @GetMapping("/dept/get_depts")
-    JsonResult<List<DeptDto>> findDeptsWithParentId(@NotNull @RequestParam(name = "parentId") Long parentId);
+    JsonResult<List<DeptDto>> findDeptsWithParentId(@RequestParam(name = "parentId") Long parentId);
 
-    @GetMapping("/dept/del")
+    /**
+     * 根据id删除部门
+     * @param deptId
+     * @return
+     */
+    @PostMapping("/dept/del")
     JsonResult<Integer> delDeptWithId(@NotNull @RequestParam(name = "deptId") Long deptId);
 }

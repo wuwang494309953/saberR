@@ -24,7 +24,7 @@ public class BeanUtil {
 
     }
 
-    public static <T> List<T> copyList(List<Object> sources, Class<T> classType) {
+    public static <T> List<T> copyList(List sources, Class<T> classType) {
         List<T> result = new LinkedList<>();
         try {
             for (Object object : sources) {

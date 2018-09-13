@@ -1,13 +1,12 @@
 package fgo.saber.auth.controller.controller;
 
 import fgo.saber.auth.api.cloudservice.DeptCloudService;
-import fgo.saber.auth.api.dto.DeptDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -21,9 +20,18 @@ public class DeptController {
     @Autowired
     private DeptCloudService deptCloudService;
 
-    @GetMapping("get_dept")
+    @GetMapping("get")
     public Map findDeptWithId(Long deptId) {
         return deptCloudService.findDeptWithId(deptId).toMap();
     }
 
+    @GetMapping("get_depts")
+    public Map findDeptsWithParentId(Long parentId) {
+        return deptCloudService.findDeptsWithParentId(parentId).toMap();
+    }
+
+    @PostMapping("/dept/del")
+    public Map delDeptWithId(Long deptId) {
+        return deptCloudService.delDeptWithId(deptId).toMap();
+    }
 }

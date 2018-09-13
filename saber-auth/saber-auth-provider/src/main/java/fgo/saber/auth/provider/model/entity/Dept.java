@@ -3,16 +3,24 @@ package fgo.saber.auth.provider.model.entity;
 import fgo.saber.common.mybatis.ext.SnowFlakeId;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.*;
 
+/**
+ * @author zq
+ */
 @Data
 @Builder
 @Table(name = "`sb_dept`")
-public class Dept {
+public class Dept implements Serializable {
+
+    private static final long serialVersionUID = -4516548559532413277L;
+
     @Id
     @KeySql(genId = SnowFlakeId.class)
     @Column(name = "`dept_id`")
