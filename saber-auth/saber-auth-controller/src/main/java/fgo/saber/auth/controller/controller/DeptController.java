@@ -1,11 +1,9 @@
 package fgo.saber.auth.controller.controller;
 
 import fgo.saber.auth.api.cloudservice.DeptCloudService;
+import fgo.saber.auth.api.dto.DeptDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
@@ -20,18 +18,24 @@ public class DeptController {
     @Autowired
     private DeptCloudService deptCloudService;
 
-    @GetMapping("get")
-    public Map findDeptWithId(Long deptId) {
+    @GetMapping("/{deptId}")
+    public Map findDeptWithId(@PathVariable Long deptId) {
         return deptCloudService.findDeptWithId(deptId).toMap();
     }
 
-    @GetMapping("get_depts")
-    public Map findDeptsWithParentId(Long parentId) {
+    @GetMapping("/parent/{parentId}")
+    public Map findDeptsWithParentId(@PathVariable(required = false) Long parentId) {
+        parentId = parentId == null ? 0 : parentId;
         return deptCloudService.findDeptsWithParentId(parentId).toMap();
     }
 
-    @PostMapping("/dept/del")
+    @PostMapping("/del")
     public Map delDeptWithId(Long deptId) {
         return deptCloudService.delDeptWithId(deptId).toMap();
+    }
+
+    @PostMapping("/save")
+    public Map saveDept(DeptDto deptDto) {
+        return deptCloudService.saveDept(deptDto).toMap();
     }
 }
