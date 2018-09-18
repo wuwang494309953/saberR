@@ -1,5 +1,6 @@
 package fgo.saber.auth.provider.T;
 
+import com.github.pagehelper.PageHelper;
 import fgo.saber.auth.provider.ProviderApplicationTests;
 import fgo.saber.auth.provider.dao.DeptMapper;
 import fgo.saber.auth.provider.model.entity.Dept;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 public class T1 extends ProviderApplicationTests {
@@ -30,15 +32,24 @@ public class T1 extends ProviderApplicationTests {
 
     @Test
     public void insert1() {
-        Dept dept = Dept.builder()
-                .name("研发部")
-                .operator("admin")
-                .operateIp("1239.1.1.1")
-                .operateTime(new Date())
-                .parentId(0L)
-                .seq(1)
-                .build();
-        deptMapper.insert(dept);
-        log.info("插入对象: {}", dept);
+        for (int i = 0; i < 20; i++) {
+            Dept dept = Dept.builder()
+                    .name("研发部")
+                    .operator("admin")
+                    .operateIp("1239.1.1.1")
+                    .operateTime(new Date())
+                    .parentId(0L)
+                    .seq(1)
+                    .build();
+            deptMapper.insert(dept);
+            log.info("插入对象: {}", dept);
+        }
     }
+    @Test
+    public void selectPage() {
+        PageHelper.startPage(1, 10);
+        List<Dept> depts = deptMapper.selectAll();
+        log.info(depts.toString());
+    }
+
 }
