@@ -2,6 +2,7 @@ package fgo.saber.auth.provider.cloud.service;
 
 import fgo.saber.auth.api.cloudservice.DeptCloudService;
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.provider.model.entity.Dept;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanUtil;
@@ -25,22 +26,33 @@ public class DeptCloudServiceImpl implements DeptCloudService {
     private DeptServiceImpl deptService;
 
     @Override
-    @GetMapping("get")
-    public JsonResult<DeptDto> findDeptWithId(@NotNull Long deptId) {
+    @GetMapping("{deptId}")
+    public JsonResult<DeptDto> findDeptWithId(@NotNull @PathVariable(name = "deptId") Long deptId) {
         DeptDto deptDto = BeanUtil.copy(deptService.selectByPrimaryKey(deptId), DeptDto.class);
         return JsonResult.success(deptDto);
     }
 
     @Override
-    @GetMapping("get_depts")
-    public JsonResult<List<DeptDto>> findDeptsWithParentId(@RequestParam(name = "parentId", defaultValue = "0") Long parentId) {
+    @GetMapping(path = {"/parent/{parentId}", "/parent"})
+    public JsonResult<List<DeptDto>> findDeptsWithParentId(@PathVariable(name = "parentId", required = false) Long parentId) {
+        parentId = parentId == null ? 0 : parentId;
         return JsonResult.success(BeanUtil.copyList(deptService.getDeptsWithParentId(parentId), DeptDto.class));
     }
 
     @Override
-    @PostMapping("/dept/del")
+    @PostMapping("/del")
     public JsonResult<Integer> delDeptWithId(@NotNull Long deptId) {
         return JsonResult.success(deptService.deleteByPrimaryKey(deptId));
+    }
+
+    @Override
+    @PostMapping("/save")
+    public JsonResult<Integer> saveDept(@RequestBody DeptDto deptDto) {
+        Dept dept = BeanUtil.copy(deptDto, Dept.class);
+        if (dept.getDeptId() == null) {
+            return JsonResult.success(deptService.insertSelective(dept));
+        }
+        return JsonResult.success(deptService.updateByPrimaryKeySelective(dept));
     }
 
 }
