@@ -1,6 +1,8 @@
 package fgo.saber.auth.api.cloudservice;
 
+import feign.QueryMap;
 import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +14,7 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/13
  */
-@FeignClient("saber-auth")
+@FeignClient(value = "saber-auth")
 public interface UserCloudService {
 
     /**
@@ -24,7 +26,8 @@ public interface UserCloudService {
     JsonResult<UserDto> findUserWithId(@NotNull @PathVariable(name = "userId") Long userId);
 
 
-    JsonResult<List<UserDto>> findUsers();
+    @GetMapping("/user/list")
+    JsonResult<List<UserDto>> findUsers(@QueryMap UserParam userParam);
 
     /**
      * 根据部门id获取部门下的用户
