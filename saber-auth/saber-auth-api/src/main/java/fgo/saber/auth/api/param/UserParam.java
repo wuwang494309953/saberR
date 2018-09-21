@@ -15,7 +15,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserParam extends BasePageParam {
+public class UserParam {
 
     private Long userId;
 

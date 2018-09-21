@@ -14,4 +14,4 @@ spring:
     time-zone: GMT+8
 logging:
   level:
-    fgo.saber.auth.api.cloudservice.UserCloudService: debug
+    fgo.saber.auth.api.cloudservice: debug

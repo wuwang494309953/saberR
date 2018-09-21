@@ -1,8 +1,9 @@
 package fgo.saber.auth.controller.controller;
 
 import fgo.saber.auth.api.cloudservice.UserCloudService;
-import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.param.BasePageParam;
+import fgo.saber.auth.api.param.UserPageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,9 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public Map findUsers(UserParam userParam) {
-        return userCloudService.findUsers(userParam).toMap();
+    public Map findUsers(UserParam userParam, BasePageParam pageParam) {
+        UserPageParam userPageParam = UserPageParam.builder().userParam(userParam).pageParam(pageParam).build();
+        return userCloudService.findUsers(userPageParam).toMap();
     }
 
     @GetMapping("/dept/{deptId}")

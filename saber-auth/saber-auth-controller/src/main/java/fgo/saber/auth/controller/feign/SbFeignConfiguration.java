@@ -1,6 +1,5 @@
 package fgo.saber.auth.controller.feign;
 
-import feign.Client;
 import feign.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,11 +13,7 @@ public class SbFeignConfiguration {
 
     @Bean
     public Logger.Level feignLoggerLevel() {
-        return Logger.Level.FULL;
+        return  Logger.Level.FULL;
     }
 
-   /* @Bean
-    public Client feignClient() {
-        return new ApacheHttpClient();
-    }*/
 }

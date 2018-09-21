@@ -1,14 +1,11 @@
 package fgo.saber.auth.provider.controller;
 
-import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.param.UserPageParam;
 import fgo.saber.base.json.JsonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -31,8 +28,8 @@ public class UserController {
 
 
     @GetMapping("/list")
-    public JsonResult<List<UserDto>> findUsers(PageDto pageDto, UserDto userDto) {
-        log.info(pageDto.toString());
+    public JsonResult<List<UserDto>> findUsers(@RequestBody UserPageParam userPageParam) {
+        log.info(userPageParam.toString());
         return null;
     }
 
