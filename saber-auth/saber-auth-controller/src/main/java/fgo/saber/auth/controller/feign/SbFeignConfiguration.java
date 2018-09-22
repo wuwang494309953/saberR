@@ -16,4 +16,5 @@ public class SbFeignConfiguration {
         return  Logger.Level.FULL;
     }
 
+
 }
