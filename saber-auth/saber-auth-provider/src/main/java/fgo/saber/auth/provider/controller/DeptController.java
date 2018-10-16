@@ -24,8 +24,8 @@ public class DeptController {
     @Autowired
     private DeptServiceImpl deptService;
 
-    @GetMapping("{deptId}")
-    public JsonResult<DeptDto> findDeptWithId(@NotNull @PathVariable(name = "deptId") Long deptId) {
+    @GetMapping("/get/{deptId}")
+    public JsonResult<DeptDto> findDeptWithId(@PathVariable(name = "deptId") Long deptId) {
         DeptDto deptDto = BeanUtil.copy(deptService.selectByPrimaryKey(deptId), DeptDto.class);
         return JsonResult.success(deptDto);
     }
@@ -38,7 +38,8 @@ public class DeptController {
 
     @PostMapping("/del")
     public JsonResult<Integer> delDeptWithId(@NotNull Long deptId) {
-        return JsonResult.success(deptService.deleteByPrimaryKey(deptId));
+        deptService.deleteByPrimaryKey(deptId);
+        return JsonResult.success();
     }
 
     @PostMapping("/save")

@@ -21,7 +21,22 @@
     <!--
       WARNING - @mbg.generated
     -->
-    user_id, dept_id, mail, operate_ip, operate_time, operator, username, password, remark, 
-    status, telephone
+    ${alias}.user_id, ${alias}.dept_id, ${alias}.mail, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.username, ${alias}.password, ${alias}.remark,
+    ${alias}.status, ${alias}.telephone
   </sql>
+
+  <!--<select id="getUsersWithDeptId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"><property name="alias" value="su"/></include>
+    from sb_user su
+    where su.dept_id = #{deptId}
+  </select>-->
+
+  <!--<select id="getUsersWithRoleId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"><property name="alias" value="su"/></include>
+    from sb_user su
+    inner join sb_user_role sur on su.user_id = sur.user_id
+    where sur.role_id = #{roleId}
+  </select>-->
 </mapper>
