@@ -1,7 +1,7 @@
 package fgo.saber.auth.provider.controller;
 
 import fgo.saber.auth.api.dto.UserDto;
-import fgo.saber.auth.api.param.UserPageParam;
+import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.auth.provider.model.entity.User;
 import fgo.saber.auth.provider.service.impl.UserServiceImpl;
@@ -30,37 +30,41 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public JsonResult<UserDto> findUserWithId(@NotNull Long userId) {
-        UserDto userDto = BeanUtil.copy(userService.selectByPrimaryKey(userId), UserDto.class);
+        UserDto userDto = BeanUtil.to(userService.selectByPrimaryKey(userId), UserDto.class);
         return JsonResult.success(userDto);
     }
 
-
     @GetMapping("/list")
-    public JsonResult<List<UserDto>> findUsers(@RequestBody UserPageParam userPageParam) {
-        log.info(userPageParam.toString());
-        return null;
+    public JsonResult<List<UserDto>> findUsers(UserParam userParam, PageParam pageParam) {
+        List<User> users = userService.findUserList(userParam, pageParam);
+        return JsonResult.success(BeanUtil.toList(users, UserDto.class));
     }
 
     @GetMapping("/dept_user/{deptId}")
     public JsonResult<List<UserDto>> findUsersWithDeptId(@PathVariable Long deptId) {
-        List<User> users = userService.getUsersWithDeptId(deptId);
-        return JsonResult.success(BeanUtil.copyList(users, UserDto.class));
+        List<User> users = userService.findUsersWithDeptId(deptId);
+        return JsonResult.success(BeanUtil.toList(users, UserDto.class));
     }
 
     @GetMapping("/role_user/{roleId}")
     public JsonResult<List<UserDto>> findUsersWithRoleId(@PathVariable Long roleId) {
-        List<User> users = userService.getUsersWithRoleId(roleId);
-        return JsonResult.success(BeanUtil.copyList(users, UserDto.class));
+        List<User> users = userService.findUsersWithRoleId(roleId);
+        return JsonResult.success(BeanUtil.toList(users, UserDto.class));
     }
 
     @PostMapping("/del")
     public JsonResult<Integer> delUserWithId(@NotNull Long userId) {
-        return JsonResult.success(userService.deleteByPrimaryKey(userId));
+        userService.deleteByPrimaryKey(userId);
+        return JsonResult.success();
     }
 
     @PostMapping("/save")
     public JsonResult<Integer> saveUser(UserParam userParam) {
-
-        return null;
+        if (userParam.getUserId() == null) {
+            userService.save(userParam);
+        } else {
+            userService.update(userParam);
+        }
+        return JsonResult.success();
     }
 }

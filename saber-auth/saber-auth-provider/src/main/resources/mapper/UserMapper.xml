@@ -25,12 +25,19 @@
     ${alias}.status, ${alias}.telephone
   </sql>
 
-  <!--<select id="getUsersWithDeptId" resultMap="BaseResultMap">
+  <select id="findUserList" resultType="fgo.saber.auth.provider.model.entity.User">
     select
     <include refid="Base_Column_List"><property name="alias" value="su"/></include>
     from sb_user su
-    where su.dept_id = #{deptId}
-  </select>-->
+    where su.status = #{pageNum}
+  </select>
+
+    <!--<select id="getUsersWithDeptId" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List"><property name="alias" value="su"/></include>
+      from sb_user su
+      where su.dept_id = #{deptId}
+    </select>-->
 
   <!--<select id="getUsersWithRoleId" resultMap="BaseResultMap">
     select

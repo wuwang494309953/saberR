@@ -12,7 +12,7 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/11
  */
-@FeignClient("saber-auth")
+@FeignClient("saber-auth-provider")
 public interface DeptCloudService {
 
     /**

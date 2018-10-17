@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class BeanUtil {
 
-    public static <D, E> D copy(E source, Class<D> clazz) {
+    public static <D, E> D to(E source, Class<D> clazz) {
         if (source == null) {
             return null;
         }
@@ -21,16 +21,27 @@ public class BeanUtil {
             dto = clazz.getConstructor(new Class[] {}).newInstance();
             PropertyUtils.copyProperties(dto, source);
         } catch (Exception e) {
-            e.printStackTrace();
             throw new CommonUtilException("对象转化时发生一个异常", e);
         }
         return dto;
     }
 
-    public static <D, E> List<D> copyList(List<E> sources, Class<D> clazz) {
+    public static <D, E> List<D> toList(List<E> sources, Class<D> clazz) {
         List<D> result = Lists.newLinkedList();
-        sources.forEach(item -> result.add(BeanUtil.copy(item, clazz)));
+        sources.forEach(item -> result.add(BeanUtil.to(item, clazz)));
         return result;
+    }
+
+    public static <D, E> E overWrite(E oldObj, D newObj) {
+        if (oldObj == null || newObj == null) {
+            return null;
+        }
+        try {
+            PropertyUtils.copyProperties(oldObj, newObj);
+        } catch (Exception e) {
+            throw new CommonUtilException("对象覆盖时发生一个异常", e);
+        }
+        return oldObj;
     }
 
     /*public static <T> T copy(Object source, Class<T> classType) {

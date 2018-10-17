@@ -1,13 +1,18 @@
 package fgo.saber.auth.provider.service.impl;
 
 import com.google.common.base.Preconditions;
+import fgo.saber.auth.api.param.PageParam;
+import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.auth.provider.dao.UserMapper;
 import fgo.saber.auth.provider.model.entity.User;
 import fgo.saber.common.abst.AbstBaseService;
+import fgo.saber.util.BeanUtil;
+import fgo.saber.util.BeanValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,15 +30,60 @@ public class UserServiceImpl extends AbstBaseService<User> {
         return userMapper;
     }
 
+    public List<User> findUserList(UserParam userParam, PageParam pageParam) {
+        return userMapper.findUserList(userParam, pageParam);
+    }
 
-    public List<User> getUsersWithDeptId(Long deptId) {
+
+    public List<User> findUsersWithDeptId(Long deptId) {
         Preconditions.checkNotNull(deptId, "部门Id不能为空");
         return userMapper.getUsersWithDeptId(deptId);
     }
 
-    public List<User> getUsersWithRoleId(Long roleId) {
+    public List<User> findUsersWithRoleId(Long roleId) {
         Preconditions.checkNotNull(roleId, "角色Id不能为空");
         return userMapper.getUsersWithRoleId(roleId);
     }
 
+    public void save(UserParam userParam) {
+        BeanValidator.check(userParam);
+
+        User user = User.builder()
+                .username(userParam.getUsername())
+                .deptId(userParam.getDeptId())
+                .telephone(userParam.getTelephone())
+                .mail(userParam.getMail())
+                .status(userParam.getStatus())
+                .remark(userParam.getRemark())
+                //todo:获取请求ip和操作者
+                .operateIp("127.0.0.1")
+                .operator("admin")
+                .operateTime(new Date())
+                .build();
+
+        userMapper.insertSelective(user);
+    }
+
+    public void update(UserParam userParam) {
+        BeanValidator.check(userParam);
+
+        User user = User.builder()
+                .username(userParam.getUsername())
+                .deptId(userParam.getDeptId())
+                .telephone(userParam.getTelephone())
+                .mail(userParam.getMail())
+                .status(userParam.getStatus())
+                .remark(userParam.getRemark())
+                //todo:获取请求ip和操作者
+                .operateIp("127.0.0.1")
+                .operator("admin")
+                .operateTime(new Date())
+                .build();
+
+        User oldUser = userMapper.selectByPrimaryKey(userParam.getUserId());
+        Preconditions.checkNotNull(oldUser, "待更新用户不存在");
+
+        BeanUtil.overWrite(oldUser, user);
+        userMapper.insertSelective(oldUser);
+    }
 }

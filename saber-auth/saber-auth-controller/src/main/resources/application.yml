@@ -6,7 +6,7 @@ spring:
   cloud:
     consul:
       port: 8500
-      host: localhost
+      host: 127.0.0.1
       discovery:
         register: false
   jackson:
@@ -15,3 +15,7 @@ spring:
 logging:
   level:
     fgo.saber.auth.api.cloudservice: debug
+#虽然这个配置没有提示但是有用。使用OkHttp替换默认的url请求
+feign:
+  okhttp:
+    enabled: true

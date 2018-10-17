@@ -26,14 +26,14 @@ public class DeptController {
 
     @GetMapping("/get/{deptId}")
     public JsonResult<DeptDto> findDeptWithId(@PathVariable(name = "deptId") Long deptId) {
-        DeptDto deptDto = BeanUtil.copy(deptService.selectByPrimaryKey(deptId), DeptDto.class);
+        DeptDto deptDto = BeanUtil.to(deptService.selectByPrimaryKey(deptId), DeptDto.class);
         return JsonResult.success(deptDto);
     }
 
     @GetMapping(path = {"/parent/{parentId}", "/parent"})
     public JsonResult<List<DeptDto>> findDeptsWithParentId(@PathVariable(name = "parentId", required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
-        return JsonResult.success(BeanUtil.copyList(deptService.getDeptsWithParentId(parentId), DeptDto.class));
+        return JsonResult.success(BeanUtil.toList(deptService.getDeptsWithParentId(parentId), DeptDto.class));
     }
 
     @PostMapping("/del")
@@ -44,7 +44,7 @@ public class DeptController {
 
     @PostMapping("/save")
     public JsonResult<Integer> saveDept(@RequestBody DeptDto deptDto) {
-        Dept dept = BeanUtil.copy(deptDto, Dept.class);
+        Dept dept = BeanUtil.to(deptDto, Dept.class);
         if (dept.getDeptId() == null) {
             return JsonResult.success(deptService.insertSelective(dept));
         }

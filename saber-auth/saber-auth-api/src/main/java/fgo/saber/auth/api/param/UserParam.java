@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author zq
@@ -19,18 +19,20 @@ public class UserParam {
 
     private Long userId;
 
+    @NotBlank(message = "部门id不能为空")
     private Long deptId;
 
     private String mail;
 
-    private Date operateTime;
-
+    @NotBlank(message = "用户名不可以为空")
     private String username;
 
     private String remark;
 
+    @NotBlank(message = "用户状态不能为空")
     private Integer status;
 
+    @NotBlank(message = "电话号码不能为空")
     private String telephone;
 
 }

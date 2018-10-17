@@ -1,20 +1,18 @@
 package fgo.saber.auth.api.cloudservice;
 
 import fgo.saber.auth.api.dto.UserDto;
-import fgo.saber.auth.api.param.UserPageParam;
-import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author zq
  * @Date 2018/9/13
  */
-@FeignClient(value = "saber-auth")
+@FeignClient(value = "saber-auth-provider")
 public interface UserCloudService {
 
     /**
@@ -23,11 +21,11 @@ public interface UserCloudService {
      * @return
      */
     @GetMapping("/user/{userId}")
-    JsonResult<UserDto> findUserWithId(@NotNull @PathVariable(name = "userId") Long userId);
+    JsonResult<UserDto> findUserWithId(@PathVariable(name = "userId") Long userId);
 
 
-    @GetMapping("/user/list")
-    JsonResult<List<UserDto>> findUsers(@RequestBody UserPageParam userPageParam);
+    @GetMapping(value = "/user/list")
+    JsonResult<List<UserDto>> findUsers(@RequestParam Map<String, Object> map);
 
     /**
      * 根据部门id获取部门下的用户
@@ -51,7 +49,7 @@ public interface UserCloudService {
      * @return
      */
     @PostMapping("/user/del")
-    JsonResult<Integer> delUserWithId(@NotNull @RequestParam(name = "userId") Long userId);
+    JsonResult<Integer> delUserWithId(@RequestParam(name = "userId") Long userId);
 
     /**
      * 保存用户
