@@ -16,6 +16,7 @@
         <module>saber-common-util</module>
         <module>saber-common-base</module>
         <module>saber-log</module>
+        <module>saber-common-shiro</module>
     </modules>
 
     <dependencies>

@@ -29,7 +29,6 @@ public class UserController {
 
     @GetMapping("/list")
     public Map findUsers(UserParam userParam, PageParam pageParam, @RequestParam Map Param) {
-        UserPageParam userPageParam = UserPageParam.builder().userParam(userParam).pageParam(pageParam).build();
         return userCloudService.findUsers(Param).toMap();
     }
 

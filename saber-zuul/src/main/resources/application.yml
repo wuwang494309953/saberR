@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: saber-zuul
+  cloud:
+    consul:
+      discovery:
+        register: false
+zuul:
+  routes:
+    saber-auth:
+      path: /saber-auth/**
+      service-id: saber-auth-controller

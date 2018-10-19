@@ -29,7 +29,17 @@
     select
     <include refid="Base_Column_List"><property name="alias" value="su"/></include>
     from sb_user su
-    where su.status = #{pageNum}
+    <where>
+      <if test="username != null">
+        su.username like concat('%', #{username}, '%')
+      </if>
+      <if test="telephone != null">
+        and su.telephone like concat('%', #{telephone}, '%')
+      </if>
+      <if test="mail != null">
+        and su.mail like concat('%', #{mail}, '%')
+      </if>
+    </where>
   </select>
 
     <!--<select id="getUsersWithDeptId" resultMap="BaseResultMap">

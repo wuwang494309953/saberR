@@ -1,5 +1,7 @@
 package fgo.saber.auth.provider.controller;
 
+import com.github.pagehelper.PageInfo;
+import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
 import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
@@ -35,9 +37,15 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public JsonResult<List<UserDto>> findUsers(UserParam userParam, PageParam pageParam) {
-        List<User> users = userService.findUserList(userParam, pageParam);
-        return JsonResult.success(BeanUtil.toList(users, UserDto.class));
+    public JsonResult<PageDto> findUsers(UserParam userParam, PageParam pageParam) {
+        PageInfo<User> userPageInfo = userService.findUserList(userParam, pageParam);
+
+        List<UserDto> userList = BeanUtil.toList(userPageInfo.getList(), UserDto.class);
+        PageDto pageDto = PageDto.builder()
+                .total(userPageInfo.getTotal())
+                .data(userList)
+                .build();
+        return JsonResult.success(pageDto);
     }
 
     @GetMapping("/dept_user/{deptId}")

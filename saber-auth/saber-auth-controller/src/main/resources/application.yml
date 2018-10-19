@@ -8,7 +8,7 @@ spring:
       port: 8500
       host: 127.0.0.1
       discovery:
-        register: false
+        register: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -17,5 +17,6 @@ logging:
     fgo.saber.auth.api.cloudservice: debug
 #虽然这个配置没有提示但是有用。使用OkHttp替换默认的url请求
 feign:
+  name: saber-auth-provider
   okhttp:
     enabled: true

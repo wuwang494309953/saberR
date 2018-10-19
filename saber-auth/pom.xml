@@ -11,6 +11,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>saber-auth-api</module>
+        <module>saber-auth-controller</module>
+        <module>saber-auth-provider</module>
     </modules>
     <artifactId>saber-auth</artifactId>
     

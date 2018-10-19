@@ -30,7 +30,7 @@ public class PageParam {
 
     private String sortValue;
 
-    private String sortStr() {
+    public String sortStr() {
         return sortKey + " " + sortValue;
     }
 

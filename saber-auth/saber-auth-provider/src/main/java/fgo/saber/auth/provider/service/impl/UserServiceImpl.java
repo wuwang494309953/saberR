@@ -1,5 +1,7 @@
 package fgo.saber.auth.provider.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
@@ -8,6 +10,7 @@ import fgo.saber.auth.provider.model.entity.User;
 import fgo.saber.common.abst.AbstBaseService;
 import fgo.saber.util.BeanUtil;
 import fgo.saber.util.BeanValidator;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
@@ -30,10 +33,16 @@ public class UserServiceImpl extends AbstBaseService<User> {
         return userMapper;
     }
 
-    public List<User> findUserList(UserParam userParam, PageParam pageParam) {
-        return userMapper.findUserList(userParam, pageParam);
+    public PageInfo<User> findUserList(UserParam userParam, PageParam pageParam) {
+        String orderStr = pageParam.sortStr();
+        if (StringUtils.isAnyBlank(pageParam.getSortKey(), pageParam.getSortValue())) {
+            //默认根据时间排序
+            orderStr = "operate_time desc";
+        }
+        PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
+        PageInfo userPage = new PageInfo(userMapper.findUserList(userParam));
+        return userPage;
     }
-
 
     public List<User> findUsersWithDeptId(Long deptId) {
         Preconditions.checkNotNull(deptId, "部门Id不能为空");

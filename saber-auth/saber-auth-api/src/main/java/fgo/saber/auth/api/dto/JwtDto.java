@@ -5,23 +5,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 /**
  * @author zq
- * @date 2018/9/18
+ * @date 2018/10/19
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageDto {
+public class JwtDto {
 
-    /**
-     * 总数
-     */
-    private long total;
-
-    private List data;
+    private String jwt;
 
 }

@@ -2,6 +2,8 @@
 
 <configuration>
 
+    <springProperty scope="context" name="appname" source="spring.application.name"/>
+
     <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
             <pattern>
@@ -24,7 +26,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>log/info.%d.log</fileNamePattern>
+            <fileNamePattern>log/${appname}/info.%d.log</fileNamePattern>
             <!-- 保留最近30天的日志文件 -->
             <maxHistory>30</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
@@ -44,7 +46,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>log/error.%d.log</fileNamePattern>
+            <fileNamePattern>log/${appname}/error.%d.log</fileNamePattern>
             <!-- 保留最近30天的日志文件 -->
             <maxHistory>30</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
