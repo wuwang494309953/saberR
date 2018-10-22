@@ -55,9 +55,8 @@ public class HmacFilter extends AccessControlFilter {
                 WebUtils.toHttp(servletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED,e.getMessage());
             }
         }
-        WebUtils.toHttp(servletResponse).sendError(HttpServletResponse.SC_UNAUTHORIZED);
         //打住，访问到此为止
-        return false;
+        return true;
     }
 
     protected AuthenticationToken createToken(ServletRequest request, ServletResponse response) {

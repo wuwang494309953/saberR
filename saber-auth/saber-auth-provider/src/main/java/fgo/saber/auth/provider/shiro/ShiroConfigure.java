@@ -41,7 +41,7 @@ public class ShiroConfigure {
 //        bean.setFilters(filterMap);
 
         Map<String, String> filterChainDefinitionMap = Maps.newLinkedHashMap();
-        filterChainDefinitionMap.put("/actuator/**", "anon");
+        filterChainDefinitionMap.put("/actuator/*", "anon");
         filterChainDefinitionMap.put("/auth/apply_token/*", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
