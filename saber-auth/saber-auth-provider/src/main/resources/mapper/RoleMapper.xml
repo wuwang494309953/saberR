@@ -15,9 +15,31 @@
     <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--
-      WARNING - @mbg.generated
-    -->
     role_id, name, operate_ip, operate_time, operator, remark, status, type
   </sql>
+
+  <sql id="ALIAS_Column_List">
+    ${alias}.role_id, ${alias}.name, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.remark, ${alias}.status, ${alias}.type
+  </sql>
+
+  <select id="findRoleList" resultType="fgo.saber.auth.provider.model.entity.Role">
+    select
+    <include refid="Base_Column_List"/>
+    from sb_role sr
+    <where>
+      <if test="name != null">
+        sr.name like concat('%', #{name}, '%')
+      </if>
+      <if test="remark != null">
+        and sr.remark like concat('%', #{remark}, '%')
+      </if>
+      <if test="status != null">
+        and sr.status like concat('%', #{status}, '%')
+      </if>
+      <if test="type != null">
+        and sr.type like concat('%', #{type}, '%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

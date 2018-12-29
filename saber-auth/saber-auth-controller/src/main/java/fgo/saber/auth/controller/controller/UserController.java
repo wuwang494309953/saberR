@@ -29,7 +29,7 @@ public class UserController {
 
     @GetMapping("/list")
     public Map findUsers(UserParam userParam, PageParam pageParam, @RequestParam Map Param) {
-        return userCloudService.findUsers(Param).toMap();
+        return userCloudService.findUsers(userParam, pageParam).toMap();
     }
 
     @GetMapping("/dept/{deptId}")

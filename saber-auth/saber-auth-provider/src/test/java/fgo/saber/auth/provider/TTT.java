@@ -3,12 +3,17 @@ package fgo.saber.auth.provider;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
+
 /**
  * @author zq
  * @Date 2018/9/18
  */
 @Slf4j
 public class TTT {
+
+    private Executor executor = Executors.newCachedThreadPool();
 
     @Test
     public void test1() {

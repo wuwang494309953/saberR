@@ -25,9 +25,9 @@ public class ShiroConfigure {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 
         bean.setSecurityManager(manager);
-//        bean.setLoginUrl("/shiro/login");
+        bean.setLoginUrl("/auth/not_login");
 //        bean.setSuccessUrl("/index");
-        bean.setUnauthorizedUrl("/shiro/unauth");
+        bean.setUnauthorizedUrl("/auth/not_auth");
 
 //        Map<String, String> filterChainDefinitionMap = myShiroService.initFilterMap();
 
@@ -42,17 +42,12 @@ public class ShiroConfigure {
 
         Map<String, String> filterChainDefinitionMap = Maps.newLinkedHashMap();
         filterChainDefinitionMap.put("/actuator/*", "anon");
-        filterChainDefinitionMap.put("/auth/apply_token/*", "anon");
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/auth/login", "anon");
+//        filterChainDefinitionMap.put("/**", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
 
-    @Bean("hmacRealm")
-    public HmacRealm hmacRealm() {
-        HmacRealm realm = new HmacRealm();
-        return realm;
-    }
 
     @Bean("securityManager")
     public SecurityManager securityManager(@Qualifier("hmacRealm") HmacRealm myRealm) {

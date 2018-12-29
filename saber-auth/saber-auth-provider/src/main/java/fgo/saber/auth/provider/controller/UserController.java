@@ -41,10 +41,7 @@ public class UserController {
         PageInfo<User> userPageInfo = userService.findUserList(userParam, pageParam);
 
         List<UserDto> userList = BeanUtil.toList(userPageInfo.getList(), UserDto.class);
-        PageDto pageDto = PageDto.builder()
-                .total(userPageInfo.getTotal())
-                .data(userList)
-                .build();
+        PageDto<UserDto> pageDto = new PageDto<>(userPageInfo.getTotal(), userList);
         return JsonResult.success(pageDto);
     }
 

@@ -24,4 +24,24 @@
     permission_id, permission_module_id, name, operate_ip, operate_time, operator, remark, 
     seq, status, type, url
   </sql>
+
+  <select id="findPermissionList" resultType="fgo.saber.auth.provider.model.entity.Permission">
+    select
+    <include refid="Base_Column_List"/>
+    from sb_permission sp
+    <where>
+      <if test="name != null">
+        sr.name like concat('%', #{name}, '%')
+      </if>
+      <if test="remark != null">
+        and sr.remark like concat('%', #{remark}, '%')
+      </if>
+      <if test="status != null">
+        and sr.status like concat('%', #{status}, '%')
+      </if>
+      <if test="type != null">
+        and sr.type like concat('%', #{type}, '%')
+      </if>
+    </where>
+  </select>
 </mapper>

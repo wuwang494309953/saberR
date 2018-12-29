@@ -37,7 +37,7 @@ public class DeptController {
     }
 
     @PostMapping("/del")
-    public JsonResult<Integer> delDeptWithId(@NotNull Long deptId) {
+    public JsonResult<Integer> delDeptWithId(@NotNull(message = "deptId不能为空") Long deptId) {
         deptService.deleteByPrimaryKey(deptId);
         return JsonResult.success();
     }

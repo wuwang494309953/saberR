@@ -40,8 +40,7 @@ public class UserServiceImpl extends AbstBaseService<User> {
             orderStr = "operate_time desc";
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
-        PageInfo userPage = new PageInfo(userMapper.findUserList(userParam));
-        return userPage;
+        return new PageInfo<>(userMapper.findUserList(userParam));
     }
 
     public List<User> findUsersWithDeptId(Long deptId) {
@@ -94,5 +93,15 @@ public class UserServiceImpl extends AbstBaseService<User> {
 
         BeanUtil.overWrite(oldUser, user);
         userMapper.insertSelective(oldUser);
+    }
+
+    public User findUserWithName(String username) {
+        User user = User.builder().username(username).build();
+        user = userMapper.selectOne(user);
+        if (user == null) {
+            user = User.builder().telephone(username).build();
+            user = userMapper.selectOne(user);
+        }
+        return user;
     }
 }

@@ -16,10 +16,24 @@
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    <!--
-      WARNING - @mbg.generated
-    -->
-    permission_module_id, parent_id, name, operate_ip, operate_time, operator, remark, 
+    permission_module_id, parent_id, name, operate_ip, operate_time, operator, remark,
     seq, status
   </sql>
+
+  <sql id="ALIAS_Column_List">
+    ${alias}.permission_module_id, ${alias}.parent_id, ${alias}.name, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.remark,
+    ${alias}.seq, ${alias}.status
+  </sql>
+
+  <select id="findPermissionModuleWithRoleId"
+          resultType="fgo.saber.auth.provider.model.entity.PermissionModule">
+    select
+      <include refid="ALIAS_Column_List"><property name="alias" value="spm"/></include>
+    from
+      sb_permission_module spm
+    inner join
+      sb_role_permission srp on srp.permission_id = spm.permission_module_id
+    where
+      srp.role_id = #{roleId}
+  </select>
 </mapper>

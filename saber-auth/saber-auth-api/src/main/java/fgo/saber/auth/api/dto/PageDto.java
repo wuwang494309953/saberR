@@ -15,13 +15,13 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PageDto {
+public class PageDto<T> {
 
     /**
      * 总数
      */
     private long total;
 
-    private List data;
+    private List<T> data;
 
 }
