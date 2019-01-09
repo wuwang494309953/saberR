@@ -15,7 +15,7 @@ spring:
     time-zone: GMT+8
   cloud:
     consul:
-      host: 127.0.0.1
+      host: 139.180.132.84
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   config-location: classpath:mybatis-config.xml

@@ -1,7 +1,7 @@
-package fgo.saber.auth.provider.shiro;
+package fgo.saber.commom.shiro;
 
 import com.google.common.collect.Maps;
-import fgo.saber.auth.provider.shiro.realm.HmacRealm;
+import fgo.saber.commom.shiro.realm.SaberRealm;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
@@ -25,40 +25,34 @@ public class ShiroConfigure {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
 
         bean.setSecurityManager(manager);
-//        bean.setLoginUrl("/shiro/login");
+        bean.setLoginUrl("/login/not_login");
 //        bean.setSuccessUrl("/index");
         bean.setUnauthorizedUrl("/shiro/unauth");
 
-//        Map<String, String> filterChainDefinitionMap = myShiroService.initFilterMap();
-
-        /*filterChainDefinitionMap.put("/test/testRole", "roles[adminm]");
-        filterChainDefinitionMap.put("/admin","roles[admin,么么]");
-        filterChainDefinitionMap.put("/edit", "perms[edit]");*/
 
         /*设置自定义的过滤器*/
 //        Map<String, Filter> filterMap = Maps.newLinkedHashMap();
-//        filterMap.put("hmac", new HmacFilter());
 //        bean.setFilters(filterMap);
 
         Map<String, String> filterChainDefinitionMap = Maps.newLinkedHashMap();
+        filterChainDefinitionMap.put("/login/*", "anon");
         filterChainDefinitionMap.put("/actuator/*", "anon");
-        filterChainDefinitionMap.put("/auth/apply_token/*", "anon");
-//        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "authc");
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return bean;
     }
 
-    @Bean("hmacRealm")
-    public HmacRealm hmacRealm() {
-        HmacRealm realm = new HmacRealm();
+    @Bean("saberRealm")
+    public SaberRealm saberRealm() {
+        SaberRealm realm = new SaberRealm();
         return realm;
     }
 
     @Bean("securityManager")
-    public SecurityManager securityManager(@Qualifier("hmacRealm") HmacRealm myRealm) {
+    public SecurityManager securityManager(@Qualifier("saberRealm") SaberRealm saberRealm) {
         DefaultWebSecurityManager manager = new DefaultWebSecurityManager();
         manager.setCacheManager(new MemoryConstrainedCacheManager());
-        manager.setRealm(myRealm);
+        manager.setRealm(saberRealm);
         return manager;
     }
 

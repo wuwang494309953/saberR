@@ -23,7 +23,7 @@ public class DeptController {
         return deptCloudService.findDeptWithId(deptId).toMap();
     }
 
-    @GetMapping("/parent/{parentId}")
+    @GetMapping(path = {"/parent/{parentId}", "/parent"})
     public Map findDeptsWithParentId(@PathVariable(required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
         return deptCloudService.findDeptsWithParentId(parentId).toMap();

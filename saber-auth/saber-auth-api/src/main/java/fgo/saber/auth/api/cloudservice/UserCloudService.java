@@ -2,6 +2,7 @@ package fgo.saber.auth.api.cloudservice;
 
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.dto.UserPasswordDto;
 import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
@@ -60,5 +61,8 @@ public interface UserCloudService {
      */
     @PostMapping("/user/save")
     JsonResult<Integer> saveUser(@RequestBody UserDto userDto);
+
+    @GetMapping("/user/findUserWithName")
+    JsonResult<UserPasswordDto> findUserWithName(@RequestParam(name = "username") String username);
 
 }
