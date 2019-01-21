@@ -1,5 +1,5 @@
 server:
-  port: 8501
+  port: 8601
 spring:
   application:
     name: saber-auth-provider
@@ -13,9 +13,6 @@ spring:
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-  cloud:
-    consul:
-      host: 139.180.132.84
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   config-location: classpath:mybatis-config.xml
@@ -25,6 +22,10 @@ logging:
 mapper:
   mappers: tk.mybatis.mapper.common.Mapper
   not-empty: true
+eureka:
+  client:
+    service-url:
+     defaultZone: http://localhost:8501/eureka/
 
 
 

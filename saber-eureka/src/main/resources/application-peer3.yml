@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: saber-eureka
+server:
+  port: 8503
+eureka:
+  instance:
+    hostname: peer3
+    home-page-url: http://${eureka.hostname}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://peer1:8501/eureka/, http://peer2:8502/eureka/
+  server:
+    renewal-percent-threshold: 0.49

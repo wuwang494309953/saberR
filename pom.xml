@@ -12,6 +12,7 @@
         <module>saber-auth</module>
         <module>saber-common</module>
         <module>saber-zuul</module>
+      <module>saber-eureka</module>
     </modules>
 
     <properties>
