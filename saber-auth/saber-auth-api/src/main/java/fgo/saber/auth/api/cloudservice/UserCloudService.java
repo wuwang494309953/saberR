@@ -62,7 +62,7 @@ public interface UserCloudService {
     @PostMapping("/user/save")
     JsonResult<Integer> saveUser(@RequestBody UserDto userDto);
 
-    @GetMapping("/user/findUserWithName")
-    JsonResult<UserPasswordDto> findUserWithName(@RequestParam(name = "username") String username);
+    @GetMapping("/user/findUserWithPhone")
+    JsonResult<UserPasswordDto> findUserWithPhone(@RequestParam(name = "phone") String phone);
 
 }

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
  * @Date 2018/9/19
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @Validated
 @Slf4j
 public class UserController {
@@ -71,5 +72,10 @@ public class UserController {
             userService.update(userParam);
         }
         return JsonResult.success();
+    }
+
+    @GetMapping("/findUserWithPhone")
+    public JsonResult<User> findUserWithPhone(@NotBlank(message = "用户名不能为空") String phone) {
+        return JsonResult.success(userService.findUserWithPhone(phone));
     }
 }

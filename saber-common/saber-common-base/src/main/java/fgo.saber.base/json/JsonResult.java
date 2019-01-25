@@ -1,5 +1,6 @@
 package fgo.saber.base.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.google.common.collect.Maps;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,6 +14,7 @@ import java.util.Map;
  */
 @Data
 @NoArgsConstructor
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class JsonResult<T> {
 
     private int code;

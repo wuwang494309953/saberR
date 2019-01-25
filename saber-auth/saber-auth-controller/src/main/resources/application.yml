@@ -1,14 +1,8 @@
 server:
-  port: 8502
+  port: 8602
 spring:
   application:
     name: saber-auth-controller
-  cloud:
-    consul:
-      port: 8500
-      host: 127.0.0.1
-      discovery:
-        register: true
   jackson:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
@@ -20,3 +14,7 @@ feign:
   name: saber-auth-provider
   okhttp:
     enabled: true
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8501/eureka/

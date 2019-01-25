@@ -25,7 +25,7 @@ public class UserRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        User user = userService.findUserWithName(token.getUsername());
+        User user = userService.findUserWithPhone(token.getUsername());
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 }

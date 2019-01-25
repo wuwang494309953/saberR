@@ -28,7 +28,7 @@ public class SaberRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        UserPasswordDto user = userCloudService.findUserWithName(token.getUsername()).getData();
+        UserPasswordDto user = userCloudService.findUserWithPhone(token.getUsername()).getData();
         return new SimpleAuthenticationInfo(user, user.getPassword(), this.getClass().getName());
     }
 }

@@ -2,6 +2,7 @@ package fgo.saber.auth.controller.controller;
 
 import fgo.saber.auth.api.cloudservice.DeptCloudService;
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.base.json.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,18 +25,18 @@ public class DeptController {
     }
 
     @GetMapping(path = {"/parent/{parentId}", "/parent"})
-    public Map findDeptsWithParentId(@PathVariable(required = false) Long parentId) {
+    public JsonResult findDeptsWithParentId(@PathVariable(required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
-        return deptCloudService.findDeptsWithParentId(parentId).toMap();
+        return deptCloudService.findDeptsWithParentId(parentId);
     }
 
     @PostMapping("/del")
-    public Map delDeptWithId(Long deptId) {
-        return deptCloudService.delDeptWithId(deptId).toMap();
+    public JsonResult delDeptWithId(Long deptId) {
+        return deptCloudService.delDeptWithId(deptId);
     }
 
     @PostMapping("/save")
-    public Map saveDept(DeptDto deptDto) {
-        return deptCloudService.saveDept(deptDto).toMap();
+    public JsonResult saveDept(DeptDto deptDto) {
+        return deptCloudService.saveDept(deptDto);
     }
 }
