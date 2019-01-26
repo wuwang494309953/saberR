@@ -3,6 +3,7 @@ package fgo.saber.auth.controller.controller;
 import fgo.saber.auth.api.cloudservice.DeptCloudService;
 import fgo.saber.auth.api.dto.DeptDto;
 import fgo.saber.base.json.JsonResult;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,6 +25,7 @@ public class DeptController {
         return deptCloudService.findDeptWithId(deptId).toMap();
     }
 
+    @RequiresRoles("admin")
     @GetMapping(path = {"/parent/{parentId}", "/parent"})
     public JsonResult findDeptsWithParentId(@PathVariable(required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
