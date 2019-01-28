@@ -25,7 +25,12 @@
     seq, status, type, url
   </sql>
 
-  <select id="findPermissionList" resultType="fgo.saber.auth.provider.model.entity.Permission">
+  <sql id="Alias_Column_List">
+    ${alias}.permission_id, ${alias}.permission_module_id, ${alias}.name, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.remark,
+    ${alias}.seq, ${alias}.status, ${alias}.type, ${alias}.url
+  </sql>
+
+  <select id="findPermissionList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from sb_permission sp
@@ -43,5 +48,15 @@
         and sr.type like concat('%', #{type}, '%')
       </if>
     </where>
+  </select>
+
+  <select id="findPermissionWithUserId" resultMap="BaseResultMap">
+    select
+      <include refid="Alias_Column_List"><property name="alias" value="sp"/></include>
+    from sb_permission sp
+    inner join sb_permission_module spm on spm.permission_module_id = sp.permission_module_id
+    inner join sb_role_permission srp on srp.permission_id = spm.permission_module_id
+    inner join sb_user_role sur on sur.role_id = srp.role_permission_id
+    where sur.user_id = #{userId}
   </select>
 </mapper>

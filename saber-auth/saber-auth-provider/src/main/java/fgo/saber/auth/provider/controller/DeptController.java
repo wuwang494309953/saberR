@@ -24,7 +24,7 @@ public class DeptController {
     @Autowired
     private DeptServiceImpl deptService;
 
-    @GetMapping("/get/{deptId}")
+    @GetMapping("/{deptId}")
     public JsonResult<DeptDto> findDeptWithId(@PathVariable(name = "deptId") Long deptId) {
         DeptDto deptDto = BeanUtil.to(deptService.selectByPrimaryKey(deptId), DeptDto.class);
         return JsonResult.success(deptDto);

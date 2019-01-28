@@ -62,6 +62,11 @@ public interface UserCloudService {
     @PostMapping("/user/save")
     JsonResult<Integer> saveUser(@RequestBody UserDto userDto);
 
+    /**
+     * 根据手机号查找用户信息
+     * @param phone
+     * @return
+     */
     @GetMapping("/user/findUserWithPhone")
     JsonResult<UserPasswordDto> findUserWithPhone(@RequestParam(name = "phone") String phone);
 

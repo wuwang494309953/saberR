@@ -42,4 +42,8 @@ public class PermissionServiceImpl extends AbstBaseService<Permission> {
     public List<Permission> findPermissionWithModuleId(Long permissionModuleId) {
         return permissionMapper.findPermissionWithModuleId(permissionModuleId);
     }
+
+    public List<Permission> findPermissionWithUserId(Long userId) {
+        return permissionMapper.findPermissionWithUserId(userId);
+    }
 }

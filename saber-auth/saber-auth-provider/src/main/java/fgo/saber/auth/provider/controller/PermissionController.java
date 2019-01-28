@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(value = "PermissionController", description = "权限点控制器")
 @RestController
-@RequestMapping("permission")
+@RequestMapping("/permission")
 @Validated
 public class PermissionController {
 
@@ -65,9 +65,15 @@ public class PermissionController {
 
     @ApiOperation(value="根据权限模块id获取权限点")
     @GetMapping("/module/{permissionModuleId}")
-    public JsonResult<List<Permission>> findRoles(@NotNull(message = "权限模块id不能为空") @PathVariable Long permissionModuleId) {
+    public JsonResult<List<Permission>> findPermissions(@PathVariable Long permissionModuleId) {
         List<Permission> rolePageInfo = permissionService.findPermissionWithModuleId(permissionModuleId);
         return JsonResult.success(rolePageInfo);
+    }
+
+    @ApiOperation(value="根据用户id获取权限点")
+    @GetMapping("/user/{userId}")
+    public JsonResult<List<Permission>> findPermissionsWithUserId(@ApiParam(value = "用户id", required = true) @PathVariable Long userId) {
+        return JsonResult.success(permissionService.findPermissionWithUserId(userId));
     }
 
 }

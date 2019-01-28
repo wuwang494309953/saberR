@@ -42,4 +42,12 @@
     </where>
   </select>
 
+  <select id="findRoleListWithUserId" resultMap="BaseResultMap">
+    select
+      <include refid="ALIAS_Column_List"><property name="alias" value="sr"/></include>
+    from sb_role sr
+    inner join sb_user_role sur on sur.role_id = sr.role_id
+    where sur.user_id = #{userId}
+  </select>
+
 </mapper>

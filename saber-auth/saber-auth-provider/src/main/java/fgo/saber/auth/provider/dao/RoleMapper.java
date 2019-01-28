@@ -10,4 +10,6 @@ public interface RoleMapper extends Mapper<Role> {
 
     List<Role> findRoleList(RoleParam roleParam);
 
+    List<Role> findRoleListWithUserId(Long userId);
+
 }

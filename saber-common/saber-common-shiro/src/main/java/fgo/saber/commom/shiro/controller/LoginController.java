@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/login")
 public class LoginController {
 
-    @GetMapping("not")
+    @GetMapping("/not")
     public JsonResult notLogin() {
         return CommonStatusCode.NOT_LOGIN;
     }

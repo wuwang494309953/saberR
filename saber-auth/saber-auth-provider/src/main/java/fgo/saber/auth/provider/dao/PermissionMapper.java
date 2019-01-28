@@ -13,4 +13,6 @@ public interface PermissionMapper extends Mapper<Permission> {
 
     @Select("select * from sb_permission where permission_module_id = #{permissionModuleId}")
     List<Permission> findPermissionWithModuleId(Long permissionModuleId);
+
+    List<Permission> findPermissionWithUserId(Long userId);
 }

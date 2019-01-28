@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 /**
  * @author zq
  * @date 2018/10/23
@@ -35,5 +37,9 @@ public class RoleServiceImpl extends AbstBaseService<Role>  {
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
         return new PageInfo<>(roleMapper.findRoleList(roleParam));
+    }
+
+    public List<Role> findRolesWithUserId(Long userId) {
+        return roleMapper.findRoleListWithUserId(userId);
     }
 }

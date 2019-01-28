@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(value = "RoleController", description = "角色控制器")
 @RestController
-@RequestMapping("role")
+@RequestMapping("/role")
 @Validated
 public class RoleController {
 
@@ -61,6 +61,12 @@ public class RoleController {
         List<UserDto> roleList = BeanUtil.toList(rolePageInfo.getList(), UserDto.class);
         PageDto pageDto = new PageDto<>(rolePageInfo.getTotal(), roleList);
         return JsonResult.success(pageDto);
+    }
+
+    @ApiOperation(value="根据用户拥有的角色")
+    @GetMapping("/user/{userId}")
+    public JsonResult<List<Role>> findRolesWithUserId(@ApiParam(value = "用户id", required = true) @PathVariable(name ="userId") Long userId) {
+        return JsonResult.success(roleService.findRolesWithUserId(userId));
     }
 
 }
