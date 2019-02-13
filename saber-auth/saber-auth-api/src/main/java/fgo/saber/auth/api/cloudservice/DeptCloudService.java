@@ -3,7 +3,11 @@ package fgo.saber.auth.api.cloudservice;
 import fgo.saber.auth.api.dto.DeptDto;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -44,6 +48,6 @@ public interface DeptCloudService {
      * @param deptDto
      * @return
      */
-    @PostMapping("/dept/save")
-    JsonResult<Integer> saveDept(@RequestBody DeptDto deptDto);
+    @PostMapping(value = "/dept/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    JsonResult<Integer> saveDept(DeptDto deptDto);
 }

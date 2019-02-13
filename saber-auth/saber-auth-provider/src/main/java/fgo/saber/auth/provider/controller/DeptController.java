@@ -10,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -43,8 +44,9 @@ public class DeptController {
     }
 
     @PostMapping("/save")
-    public JsonResult<Integer> saveDept(@RequestBody DeptDto deptDto) {
+    public JsonResult<Integer> saveDept(DeptDto deptDto) {
         Dept dept = BeanUtil.to(deptDto, Dept.class);
+        dept.setOperateTime(new Date());
         if (dept.getDeptId() == null) {
             return JsonResult.success(deptService.insertSelective(dept));
         }
