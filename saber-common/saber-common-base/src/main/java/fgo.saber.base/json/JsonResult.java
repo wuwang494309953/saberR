@@ -58,7 +58,7 @@ public class JsonResult<T> {
         return result;
     }
 
-    public Map toMap() {
+    /*public Map toMap() {
         Map result = Maps.newLinkedHashMap();
         result.put("code", this.getCode());
         if (StringUtils.isNotBlank(this.getMsg())) {
@@ -68,5 +68,5 @@ public class JsonResult<T> {
             result.put("data", this.getData());
         }
         return result;
-    }
+    }*/
 }

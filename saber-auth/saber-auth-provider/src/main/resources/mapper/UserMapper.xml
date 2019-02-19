@@ -25,10 +25,11 @@
     ${alias}.status, ${alias}.telephone
   </sql>
 
-  <select id="findUserList" resultType="fgo.saber.auth.provider.model.entity.User">
+  <select id="findUserList" resultType="fgo.saber.auth.api.dto.UserDto">
     select
-    <include refid="Base_Column_List"><property name="alias" value="su"/></include>
+      su.user_id userId, su.dept_id deptId, sd.name, su.mail, su.operate_time operateTime, su.username, su.remark, su.status, su.telephone
     from sb_user su
+    left join sb_dept sd on sd.dept_id = su.dept_id
     <where>
       <if test="username != null">
         su.username like concat('%', #{username}, '%')

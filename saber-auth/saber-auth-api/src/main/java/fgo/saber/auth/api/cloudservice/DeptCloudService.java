@@ -16,7 +16,7 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/11
  */
-@FeignClient("${feign.name}")
+@FeignClient(value = "${feign.name}", path = "/dept")
 public interface DeptCloudService {
 
     /**
@@ -50,4 +50,12 @@ public interface DeptCloudService {
      */
     @PostMapping(value = "/dept/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     JsonResult<Integer> saveDept(DeptDto deptDto);
+
+    /**
+     * 根据部门名搜索没有子节点的部门
+     * @param deptName
+     * @return
+     */
+    @GetMapping("/foot")
+    JsonResult<List<DeptDto>> getDeptFootWithDeptName(@RequestParam(name = "deptName") String deptName);
 }

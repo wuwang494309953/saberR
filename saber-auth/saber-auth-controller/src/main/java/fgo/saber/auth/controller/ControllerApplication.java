@@ -6,7 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
-@SpringBootApplication(scanBasePackages = {"fgo.saber.auth.controller", "fgo.saber.commom.shiro"})
+//@SpringBootApplication(scanBasePackages = {"fgo.saber.auth.controller", "fgo.saber.commom.shiro"})
+@SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = "fgo.saber.auth.api.cloudservice", defaultConfiguration = SbFeignConfiguration.class)
 public class ControllerApplication {

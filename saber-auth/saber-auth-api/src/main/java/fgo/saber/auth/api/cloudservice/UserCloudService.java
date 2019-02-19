@@ -3,10 +3,10 @@ package fgo.saber.auth.api.cloudservice;
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
 import fgo.saber.auth.api.dto.UserPasswordDto;
-import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,8 +27,8 @@ public interface UserCloudService {
     JsonResult<UserDto> findUserWithId(@PathVariable(name = "userId") Long userId);
 
 
-    @GetMapping(value = "/user/list")
-    JsonResult<PageDto> findUsers(@RequestParam(name = "1") UserParam userParam, @RequestParam("2") PageParam pageParam);
+    @GetMapping(value = "/user/list", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    JsonResult<PageDto> findUsers(UserParam userParam);
 
     /**
      * 根据部门id获取部门下的用户

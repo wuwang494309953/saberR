@@ -5,6 +5,7 @@ import fgo.saber.auth.provider.model.entity.Dept;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanUtil;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/11
  */
+@Api(value = "DeptController", description = "部门控制器")
 @RestController
 @RequestMapping("dept")
 @Validated
@@ -25,7 +27,7 @@ public class DeptController {
     @Autowired
     private DeptServiceImpl deptService;
 
-    @GetMapping("/{deptId}")
+    @GetMapping("/detail/{deptId}")
     public JsonResult<DeptDto> findDeptWithId(@PathVariable(name = "deptId") Long deptId) {
         DeptDto deptDto = BeanUtil.to(deptService.selectByPrimaryKey(deptId), DeptDto.class);
         return JsonResult.success(deptDto);
@@ -52,5 +54,11 @@ public class DeptController {
         }
         return JsonResult.success(deptService.updateByPrimaryKeySelective(dept));
     }
+
+    @GetMapping("/foot")
+    public JsonResult<List<DeptDto>> getDeptFootWithDeptName(String deptName) {
+        return JsonResult.success(BeanUtil.toList(deptService.getDeptFootWithDeptName(deptName), DeptDto.class));
+    }
+
 
 }

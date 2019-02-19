@@ -14,7 +14,7 @@ logging:
 #虽然这个配置没有提示但是有用。使用OkHttp替换默认的url请求
 feign:
   name: saber-auth-provider
-  okhttp:
+  httpclient:
     enabled: true
 eureka:
   client:

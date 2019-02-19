@@ -69,7 +69,7 @@
 
         <dependency>
             <groupId>io.github.openfeign</groupId>
-            <artifactId>feign-okhttp</artifactId>
+            <artifactId>feign-httpclient</artifactId>
         </dependency>
 
         <dependency>

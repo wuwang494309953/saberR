@@ -1,18 +1,14 @@
 package fgo.saber.auth.api.param;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author zq
  * @Date 2018/9/19
  */
+
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class PageParam {
 
     /**
@@ -31,7 +27,14 @@ public class PageParam {
     private String sortValue;
 
     public String sortStr() {
-        return sortKey + " " + sortValue;
+        return sortStr(null);
+    }
+
+    public String sortStr(String tableAlias) {
+        if (StringUtils.isBlank(tableAlias)) {
+            return sortKey + " " + sortValue;
+        }
+        return tableAlias + "." + sortKey + " " + sortValue;
     }
 
 }

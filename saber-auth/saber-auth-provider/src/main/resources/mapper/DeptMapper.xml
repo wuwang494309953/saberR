@@ -21,12 +21,29 @@
     -->
     dept_id, name, operate_ip, operate_time, operator, parent_id, remark, seq
   </sql>
+  <sql id="Alias_Column_List">
+    ${alias}.dept_id, ${alias}.name, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.parent_id, ${alias}.remark, ${alias}.seq
+  </sql>
   <select id="findDeptsWithParentId" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from sb_dept
     where parent_id = #{parentId}
     order by seq asc
+  </select>
+
+  <select id="getDeptFootWithDeptName" resultMap="BaseResultMap">
+    select
+    <include refid="Alias_Column_List"><property name="alias" value="sd"/></include>
+    from sb_dept sd
+    left join (
+      select DISTINCT dept_id from sb_dept
+    ) di on sd.parent_id = di.dept_id
+    where di.dept_id is null
+    <if test="deptName != null">
+      and sd.name like concat('%', #{deptName}, '%')
+    </if>
+    limit 15
   </select>
 
 </mapper>

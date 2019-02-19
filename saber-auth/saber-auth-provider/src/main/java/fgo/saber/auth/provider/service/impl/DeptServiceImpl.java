@@ -28,4 +28,8 @@ public class DeptServiceImpl extends AbstBaseService<Dept> {
         return deptMapper.findDeptsWithParentId(parentId);
     }
 
+    public List<Dept> getDeptFootWithDeptName(String deptName) {
+        return deptMapper.getDeptFootWithDeptName(deptName);
+    }
+
 }

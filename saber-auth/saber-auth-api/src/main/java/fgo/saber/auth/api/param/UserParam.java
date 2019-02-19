@@ -15,7 +15,7 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserParam {
+public class UserParam extends PageParam {
 
     private Long userId;
 

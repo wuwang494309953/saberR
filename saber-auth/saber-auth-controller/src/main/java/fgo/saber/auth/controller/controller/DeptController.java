@@ -6,8 +6,6 @@ import fgo.saber.base.json.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Map;
-
 /**
  * @author zq
  * @Date 2018/9/12
@@ -20,8 +18,8 @@ public class DeptController {
     private DeptCloudService deptCloudService;
 
     @GetMapping("/{deptId}")
-    public Map findDeptWithId(@PathVariable Long deptId) {
-        return deptCloudService.findDeptWithId(deptId).toMap();
+    public JsonResult findDeptWithId(@PathVariable Long deptId) {
+        return deptCloudService.findDeptWithId(deptId);
     }
 
 //    @RequiresRoles("admin")
@@ -39,5 +37,10 @@ public class DeptController {
     @PostMapping("/save")
     public JsonResult saveDept(DeptDto deptDto) {
         return deptCloudService.saveDept(deptDto);
+    }
+
+    @GetMapping("/foot")
+    public JsonResult getDeptFootWithDeptName(String deptName) {
+        return JsonResult.success(deptCloudService.getDeptFootWithDeptName(deptName));
     }
 }
