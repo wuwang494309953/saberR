@@ -31,14 +31,14 @@
     from sb_user su
     left join sb_dept sd on sd.dept_id = su.dept_id
     <where>
-      <if test="username != null">
-        su.username like concat('%', #{username}, '%')
+      <if test="userParam.username != null">
+        su.username like concat('%', #{userParam.username}, '%')
       </if>
-      <if test="telephone != null">
-        and su.telephone like concat('%', #{telephone}, '%')
+      <if test="userParam.telephone != null">
+        and su.telephone like concat('%', #{userParam.telephone}, '%')
       </if>
-      <if test="mail != null">
-        and su.mail like concat('%', #{mail}, '%')
+      <if test="userParam.mail != null">
+        and su.mail like concat('%', #{userParam.mail}, '%')
       </if>
     </where>
   </select>

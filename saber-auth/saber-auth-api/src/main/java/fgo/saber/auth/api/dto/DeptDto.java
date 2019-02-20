@@ -32,6 +32,8 @@ public class DeptDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long parentId;
 
+    private String parentName;
+
     private String remark;
 
     private Integer seq;

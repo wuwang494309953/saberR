@@ -46,4 +46,17 @@
     limit 15
   </select>
 
+  <select id="findDeptDtoList" resultType="fgo.saber.auth.api.dto.DeptDto">
+    select
+      sd.dept_id deptId, sd.name, sd.operate_ip operateIp, sd.operate_time operateTime,
+      sd.operator, sd.parent_id parentId, sd.remark, sd.seq, sd2.name parentName
+    from sb_dept sd
+    left join sb_dept sd2 on sd2.dept_id = sd.parent_id
+    <where>
+      <if test="deptParam.name != null">
+        sd.name like concat('%', #{deptParam.name}, '%')
+      </if>
+    </where>
+  </select>
+
 </mapper>

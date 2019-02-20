@@ -10,9 +10,6 @@ import org.springframework.cloud.openfeign.support.SpringEncoder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
-
-import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 /**
  * @author zq
@@ -35,19 +32,18 @@ public class SbFeignConfiguration {
         return  Logger.Level.FULL;
     }
 
-//    @Bean
-//    public Decoder feignDecoder() {
-//        return new OptionalDecoder(new ResponseEntityDecoder(new SpringDecoder(this.messageConverters)));
-//    }
-//
-//    @Bean
-//    public Encoder feignEncoder() {
-//        return new SpringEncoder(this.messageConverters);
-//    }
+    /*@Bean
+    public Decoder feignDecoder() {
+        return new OptionalDecoder(new ResponseEntityDecoder(new SpringDecoder(this.messageConverters)));
+    }*/
+
+    /*@Bean
+    public Encoder feignEncoder() {
+        return new SaberEncoder(this.messageConverters);
+    }*/
 
     @Bean
     @Primary
-    @Scope(SCOPE_PROTOTYPE)
     public Encoder feignFormEncoder() {
         return new SpringFormEncoder(new SpringEncoder(messageConverters));
     }

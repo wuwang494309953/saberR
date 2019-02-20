@@ -1,6 +1,9 @@
 package fgo.saber.auth.provider.controller;
 
+import com.github.pagehelper.PageInfo;
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.api.dto.PageDto;
+import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.auth.provider.model.entity.Dept;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
 import fgo.saber.base.json.JsonResult;
@@ -31,6 +34,13 @@ public class DeptController {
     public JsonResult<DeptDto> findDeptWithId(@PathVariable(name = "deptId") Long deptId) {
         DeptDto deptDto = BeanUtil.to(deptService.selectByPrimaryKey(deptId), DeptDto.class);
         return JsonResult.success(deptDto);
+    }
+
+    @GetMapping("/list")
+    public JsonResult<PageDto> findDeptList(DeptParam deptParam) {
+        PageInfo<DeptDto> deptPageInfo = deptService.findDeptList(deptParam);
+        PageDto<DeptDto> pageDto = new PageDto<>(deptPageInfo.getTotal(), deptPageInfo.getList());
+        return JsonResult.success(pageDto);
     }
 
     @GetMapping(path = {"/parent/{parentId}", "/parent"})

@@ -6,7 +6,6 @@ import fgo.saber.auth.api.dto.UserPasswordDto;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public interface UserCloudService {
     JsonResult<UserDto> findUserWithId(@PathVariable(name = "userId") Long userId);
 
 
-    @GetMapping(value = "/user/list", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @GetMapping(value = "/user/list")
     JsonResult<PageDto> findUsers(UserParam userParam);
 
     /**

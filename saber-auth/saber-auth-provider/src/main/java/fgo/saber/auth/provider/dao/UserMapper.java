@@ -3,6 +3,7 @@ package fgo.saber.auth.provider.dao;
 import fgo.saber.auth.api.dto.UserDto;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.auth.provider.model.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -16,6 +17,6 @@ public interface UserMapper extends Mapper<User> {
     @Select("select su.* from sb_user su inner join sb_user_role sur on su.user_id = sur.user_id where sur.role_id = #{roleId}")
     List<User> getUsersWithRoleId(Long roleId);
 
-    List<UserDto> findUserList(UserParam userParam);
+    List<UserDto> findUserList(@Param("userParam") UserParam userParam);
 
 }

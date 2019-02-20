@@ -1,6 +1,8 @@
 package fgo.saber.auth.api.cloudservice;
 
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.api.dto.PageDto;
+import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
@@ -24,15 +26,23 @@ public interface DeptCloudService {
      * @param deptId
      * @return
      */
-    @GetMapping("/dept/{deptId}")
+    @GetMapping("/{deptId}")
     JsonResult<DeptDto> findDeptWithId(@NotNull @PathVariable(name = "deptId") Long deptId);
+
+    /**
+     *根据部门列表
+     * @param deptParam
+     * @return
+     */
+    @GetMapping("/list")
+    JsonResult<PageDto> findDeptList(DeptParam deptParam);
 
     /**
      * 根据父id寻找子部门
      * @param parentId
      * @return
      */
-    @GetMapping("/dept/parent/{parentId}")
+    @GetMapping("/parent/{parentId}")
     JsonResult<List<DeptDto>> findDeptsWithParentId(@PathVariable(name = "parentId") Long parentId);
 
     /**
@@ -40,7 +50,7 @@ public interface DeptCloudService {
      * @param deptId
      * @return
      */
-    @PostMapping("/dept/del")
+    @PostMapping("/del")
     JsonResult<Integer> delDeptWithId(@NotNull @RequestParam(name = "deptId") Long deptId);
 
     /**
@@ -48,7 +58,7 @@ public interface DeptCloudService {
      * @param deptDto
      * @return
      */
-    @PostMapping(value = "/dept/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     JsonResult<Integer> saveDept(DeptDto deptDto);
 
     /**
