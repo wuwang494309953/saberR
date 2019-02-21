@@ -5,6 +5,7 @@ import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,7 +36,7 @@ public interface DeptCloudService {
      * @return
      */
     @GetMapping("/list")
-    JsonResult<PageDto> findDeptList(DeptParam deptParam);
+    JsonResult<PageDto> findDeptList(@SpringQueryMap DeptParam deptParam);
 
     /**
      * 根据父id寻找子部门

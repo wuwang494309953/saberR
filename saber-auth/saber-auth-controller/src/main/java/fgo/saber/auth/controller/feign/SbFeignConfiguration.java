@@ -1,8 +1,11 @@
 package fgo.saber.auth.controller.feign;
 
+import feign.Feign;
 import feign.Logger;
+import feign.Retryer;
 import feign.codec.Encoder;
 import feign.form.spring.SpringFormEncoder;
+import feign.querymap.BeanQueryMapEncoder;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
@@ -48,6 +51,12 @@ public class SbFeignConfiguration {
         return new SpringFormEncoder(new SpringEncoder(messageConverters));
     }
 
+    @Bean
+    public Feign.Builder feignBuilder() {
+        return Feign.builder()
+                .queryMapEncoder(new BeanQueryMapEncoder())
+                .retryer(Retryer.NEVER_RETRY);
+    }
 
     /*@Bean
     public Encoder fgoEncoder() {

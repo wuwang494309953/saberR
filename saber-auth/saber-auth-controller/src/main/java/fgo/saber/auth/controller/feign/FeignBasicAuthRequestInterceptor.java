@@ -6,7 +6,6 @@ import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
@@ -17,7 +16,7 @@ import java.util.*;
  * @date 2019/2/18
  */
 @Configurable
-@Component
+//@Component
 public class FeignBasicAuthRequestInterceptor implements RequestInterceptor {
 
     @Autowired
