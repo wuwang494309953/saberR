@@ -41,7 +41,7 @@ public class DeptServiceImpl extends AbstBaseService<Dept> {
         return new PageInfo<>(deptMapper.findDeptDtoList(deptParam));
     }
 
-    public List<Dept> getDeptsWithParentId(Long parentId) {
+    public List<DeptDto> getDeptsWithParentId(Long parentId) {
         return deptMapper.findDeptsWithParentId(parentId);
     }
 

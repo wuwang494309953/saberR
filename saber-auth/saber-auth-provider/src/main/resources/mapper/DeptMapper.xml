@@ -24,12 +24,16 @@
   <sql id="Alias_Column_List">
     ${alias}.dept_id, ${alias}.name, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.parent_id, ${alias}.remark, ${alias}.seq
   </sql>
-  <select id="findDeptsWithParentId" resultMap="BaseResultMap">
+  <select id="findDeptsWithParentId" resultType="fgo.saber.auth.api.dto.DeptDto">
     select
-    <include refid="Base_Column_List"/>
-    from sb_dept
-    where parent_id = #{parentId}
-    order by seq asc
+      sd.dept_id deptId, sd.name, sd.operate_ip operateIp, sd.operate_time operateTime, sd.operator,
+      sd.parent_id parentId, sd.remark, sd.seq, !ISNULL(sd1.parent_id) hasChild
+    from sb_dept sd
+    left join (
+      select distinct parent_id from sb_dept
+    ) sd1 on sd1.parent_id = sd.dept_id
+    where sd.parent_id = #{parentId}
+    order by sd.seq asc
   </select>
 
   <select id="getDeptFootWithDeptName" resultMap="BaseResultMap">

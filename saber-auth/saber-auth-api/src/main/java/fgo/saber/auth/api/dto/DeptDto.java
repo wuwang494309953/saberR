@@ -37,4 +37,9 @@ public class DeptDto {
     private String remark;
 
     private Integer seq;
+
+    /**
+     * 是否存在子节点
+     */
+    private Integer hasChild;
 }

@@ -11,7 +11,7 @@ import java.util.List;
 //@CacheNamespaceRef(DeptMapper.class)
 public interface DeptMapper extends Mapper<Dept> {
 
-    List<Dept> findDeptsWithParentId(Long parentId);
+    List<DeptDto> findDeptsWithParentId(Long parentId);
 
     List<Dept> getDeptFootWithDeptName(@Param("deptName") String deptName);
 

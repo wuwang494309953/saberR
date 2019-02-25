@@ -30,6 +30,7 @@ public class DeptController {
 
 //    @RequiresRoles("admin")
     @GetMapping(path = {"/parent/{parentId}", "/parent"})
+//    @JsonView(DeptDto.DeptTreeView.class)
     public JsonResult findDeptsWithParentId(@PathVariable(required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
         return deptCloudService.findDeptsWithParentId(parentId);

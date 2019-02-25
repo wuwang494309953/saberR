@@ -46,7 +46,8 @@ public class DeptController {
     @GetMapping(path = {"/parent/{parentId}", "/parent"})
     public JsonResult<List<DeptDto>> findDeptsWithParentId(@PathVariable(name = "parentId", required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
-        return JsonResult.success(BeanUtil.toList(deptService.getDeptsWithParentId(parentId), DeptDto.class));
+        List<DeptDto> deptDtos = BeanUtil.toList(deptService.getDeptsWithParentId(parentId), DeptDto.class);
+        return JsonResult.success(deptDtos);
     }
 
     @PostMapping("/del")
