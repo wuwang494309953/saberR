@@ -44,7 +44,12 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
-
+        <!-- https://mvnrepository.com/artifact/io.shardingsphere/sharding-jdbc-core -->
+        <dependency>
+            <groupId>io.shardingsphere</groupId>
+            <artifactId>sharding-jdbc-core</artifactId>
+            <version>3.1.0</version>
+        </dependency>
 
     </dependencies>
 

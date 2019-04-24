@@ -8,6 +8,7 @@ import fgo.saber.auth.provider.model.entity.Dept;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanUtil;
+import fgo.saber.util.BeanValidator;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -57,8 +58,9 @@ public class DeptController {
     }
 
     @PostMapping("/save")
-    public JsonResult<Integer> saveDept(DeptDto deptDto) {
-        Dept dept = BeanUtil.to(deptDto, Dept.class);
+    public JsonResult<Integer> saveDept(DeptParam deptParam) {
+        BeanValidator.check(deptParam);
+        Dept dept = BeanUtil.to(deptParam, Dept.class);
         dept.setOperateTime(new Date());
         if (dept.getDeptId() == null) {
             return JsonResult.success(deptService.insertSelective(dept));

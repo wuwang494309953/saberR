@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
 import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.auth.provider.dao.UserMapper;
 import fgo.saber.auth.provider.model.entity.User;
@@ -33,13 +34,13 @@ public class UserServiceImpl extends AbstBaseService<User> {
         return userMapper;
     }
 
-    public PageInfo<UserDto> findUserList(UserParam userParam) {
-        String orderStr = userParam.sortStr("su");
-        if (StringUtils.isAnyBlank(userParam.getSortKey(), userParam.getSortValue())) {
+    public PageInfo<UserDto> findUserList(UserParam userParam, PageParam pageParam) {
+        String orderStr = pageParam.sortStr("su");
+        if (StringUtils.isAnyBlank(pageParam.getSortKey(), pageParam.getSortValue())) {
             //默认根据时间排序
             orderStr = "su.operate_time desc";
         }
-        PageHelper.startPage(userParam.getPageNum(), userParam.getPageSize(), orderStr);
+        PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
         return new PageInfo<>(userMapper.findUserList(userParam));
     }
 

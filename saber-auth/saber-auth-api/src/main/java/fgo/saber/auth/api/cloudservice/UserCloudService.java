@@ -3,11 +3,16 @@ package fgo.saber.auth.api.cloudservice;
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
 import fgo.saber.auth.api.dto.UserPasswordDto;
+import fgo.saber.auth.api.param.UserPageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.cloud.openfeign.SpringQueryMap;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -28,7 +33,7 @@ public interface UserCloudService {
 
 
     @GetMapping(value = "/user/list")
-    JsonResult<PageDto> findUsers(@SpringQueryMap UserParam userParam);
+    JsonResult<PageDto> findUsers(@SpringQueryMap UserPageParam userParam);
 
     /**
      * 根据部门id获取部门下的用户
@@ -56,11 +61,11 @@ public interface UserCloudService {
 
     /**
      * 保存用户
-     * @param userDto
+     * @param userParam
      * @return
      */
-    @PostMapping("/user/save")
-    JsonResult<Integer> saveUser(@RequestBody UserDto userDto);
+    @PostMapping(value = "/user/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    JsonResult<Integer> saveUser(UserParam userParam);
 
     /**
      * 根据手机号查找用户信息

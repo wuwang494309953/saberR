@@ -42,8 +42,8 @@ public class DeptController {
     }
 
     @PostMapping("/save")
-    public JsonResult saveDept(DeptDto deptDto) {
-        return deptCloudService.saveDept(deptDto);
+    public JsonResult saveDept(DeptParam deptParam) {
+        return deptCloudService.saveDept(deptParam);
     }
 
     @GetMapping("/foot")

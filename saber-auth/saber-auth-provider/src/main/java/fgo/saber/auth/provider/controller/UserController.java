@@ -3,6 +3,7 @@ package fgo.saber.auth.provider.controller;
 import com.github.pagehelper.PageInfo;
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.UserParam;
 import fgo.saber.auth.provider.model.entity.User;
 import fgo.saber.auth.provider.service.impl.UserServiceImpl;
@@ -37,8 +38,8 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public JsonResult<PageDto> findUsers(UserParam userParam) {
-        PageInfo<UserDto> userPageInfo = userService.findUserList(userParam);
+    public JsonResult<PageDto> findUsers(UserParam userParam, PageParam pageParam) {
+        PageInfo<UserDto> userPageInfo = userService.findUserList(userParam, pageParam);
         PageDto<UserDto> pageDto = new PageDto<>(userPageInfo.getTotal(), userPageInfo.getList());
         return JsonResult.success(pageDto);
     }
@@ -58,7 +59,7 @@ public class UserController {
     @PostMapping("/del")
     public JsonResult<Integer> delUserWithId(@NotNull Long userId) {
         userService.deleteByPrimaryKey(userId);
-        return JsonResult.success();
+        return JsonResult.success("删除成功");
     }
 
     @PostMapping("/save")
@@ -68,7 +69,7 @@ public class UserController {
         } else {
             userService.update(userParam);
         }
-        return JsonResult.success();
+        return JsonResult.success("保存成功");
     }
 
     @GetMapping("/findUserWithPhone")

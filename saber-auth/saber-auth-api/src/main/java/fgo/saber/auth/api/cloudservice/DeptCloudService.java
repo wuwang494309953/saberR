@@ -56,11 +56,11 @@ public interface DeptCloudService {
 
     /**
      * 保存部门
-     * @param deptDto
+     * @param deptParam
      * @return
      */
     @PostMapping(value = "/save", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    JsonResult<Integer> saveDept(DeptDto deptDto);
+    JsonResult<Integer> saveDept(DeptParam deptParam);
 
     /**
      * 根据部门名搜索没有子节点的部门

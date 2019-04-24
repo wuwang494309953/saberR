@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
@@ -40,5 +41,16 @@ public class TTT {
 
         }
         return result;
+    }
+
+    ExecutorService executorService = Executors.newCachedThreadPool();
+
+    public void test2() {
+        executorService.execute(new Runnable() {
+            @Override
+            public void run() {
+                log.info("123");
+            }
+        });
     }
 }

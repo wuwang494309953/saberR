@@ -27,7 +27,7 @@
 
   <select id="findUserList" resultType="fgo.saber.auth.api.dto.UserDto">
     select
-      su.user_id userId, su.dept_id deptId, sd.name, su.mail, su.operate_time operateTime, su.username, su.remark, su.status, su.telephone
+      su.user_id userId, su.dept_id deptId, sd.name deptName, su.mail, su.operate_time operateTime, su.username, su.remark, su.status, su.telephone
     from sb_user su
     left join sb_dept sd on sd.dept_id = su.dept_id
     <where>
