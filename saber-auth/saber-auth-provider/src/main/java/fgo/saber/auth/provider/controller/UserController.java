@@ -64,11 +64,7 @@ public class UserController {
 
     @PostMapping("/save")
     public JsonResult<Integer> saveUser(UserParam userParam) {
-        if (userParam.getUserId() == null) {
-            userService.save(userParam);
-        } else {
-            userService.update(userParam);
-        }
+        userService.save(userParam);
         return JsonResult.success("保存成功");
     }
 

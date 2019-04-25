@@ -4,7 +4,6 @@ import com.github.pagehelper.PageInfo;
 import fgo.saber.auth.api.dto.DeptDto;
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.param.DeptParam;
-import fgo.saber.auth.provider.model.entity.Dept;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanUtil;
@@ -15,7 +14,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -54,18 +52,14 @@ public class DeptController {
     @PostMapping("/del")
     public JsonResult<Integer> delDeptWithId(@NotNull(message = "deptId不能为空") Long deptId) {
         deptService.deleteByPrimaryKey(deptId);
-        return JsonResult.success();
+        return JsonResult.success("删除成功");
     }
 
     @PostMapping("/save")
     public JsonResult<Integer> saveDept(DeptParam deptParam) {
         BeanValidator.check(deptParam);
-        Dept dept = BeanUtil.to(deptParam, Dept.class);
-        dept.setOperateTime(new Date());
-        if (dept.getDeptId() == null) {
-            return JsonResult.success(deptService.insertSelective(dept));
-        }
-        return JsonResult.success(deptService.updateByPrimaryKeySelective(dept));
+        deptService.save(deptParam);
+        return JsonResult.success("保存成功");
     }
 
     @GetMapping("/foot")

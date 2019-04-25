@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author zq
@@ -20,6 +21,7 @@ public class DeptParam extends PageParam {
     @NotBlank(message = "部门名字name不能为空")
     private String name;
 
+    @NotNull(message = "父节点不能为空")
     private Long parentId;
 
     private String remark;

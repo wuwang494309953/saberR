@@ -57,43 +57,32 @@ public class UserServiceImpl extends AbstBaseService<User> {
     public void save(UserParam userParam) {
         BeanValidator.check(userParam);
 
-        User user = User.builder()
-                .username(userParam.getUsername())
-                .deptId(userParam.getDeptId())
-                .telephone(userParam.getTelephone())
-                .mail(userParam.getMail())
-                .status(userParam.getStatus())
-                .remark(userParam.getRemark())
-                //todo:获取请求ip和操作者
-                .operateIp("127.0.0.1")
-                .operator("admin")
-                .operateTime(new Date())
-                .build();
+        if (userParam.getUserId() == null) {
+            User user = User.builder()
+                    .username(userParam.getUsername())
+                    .deptId(userParam.getDeptId())
+                    .telephone(userParam.getTelephone())
+                    .mail(userParam.getMail())
+                    .status(userParam.getStatus())
+                    .remark(userParam.getRemark())
+                    //todo:获取请求ip和操作者
+                    .operateIp("127.0.0.1")
+                    .operator("admin")
+                    .operateTime(new Date())
+                    .build();
 
-        userMapper.insertSelective(user);
-    }
+            userMapper.insertSelective(user);
+        } else {
+            User oldUser = userMapper.selectByPrimaryKey(userParam.getUserId());
+            Preconditions.checkNotNull(oldUser, "待更新用户不存在");
 
-    public void update(UserParam userParam) {
-        BeanValidator.check(userParam);
+            oldUser.setOperateTime(new Date());
+            oldUser.setOperateIp("127.0.0.1");
+            oldUser.setOperator("admin");
+            BeanUtil.overWrite(oldUser, userParam);
+            userMapper.insertSelective(oldUser);
+        }
 
-        User user = User.builder()
-                .username(userParam.getUsername())
-                .deptId(userParam.getDeptId())
-                .telephone(userParam.getTelephone())
-                .mail(userParam.getMail())
-                .status(userParam.getStatus())
-                .remark(userParam.getRemark())
-                //todo:获取请求ip和操作者
-                .operateIp("127.0.0.1")
-                .operator("admin")
-                .operateTime(new Date())
-                .build();
-
-        User oldUser = userMapper.selectByPrimaryKey(userParam.getUserId());
-        Preconditions.checkNotNull(oldUser, "待更新用户不存在");
-
-        BeanUtil.overWrite(oldUser, user);
-        userMapper.insertSelective(oldUser);
     }
 
     public User findUserWithPhone(String username) {
