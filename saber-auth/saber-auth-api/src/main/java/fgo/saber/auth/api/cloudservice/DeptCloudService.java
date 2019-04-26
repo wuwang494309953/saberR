@@ -1,6 +1,7 @@
 package fgo.saber.auth.api.cloudservice;
 
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.api.dto.DeptTreeDto;
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.base.json.JsonResult;
@@ -69,4 +70,11 @@ public interface DeptCloudService {
      */
     @GetMapping("/foot")
     JsonResult<List<DeptDto>> getDeptFootWithDeptName(@RequestParam(name = "deptName") String deptName);
+
+    /**
+     * 获取部门树
+     * @return
+     */
+    @GetMapping("/tree")
+    JsonResult<List<DeptTreeDto>> getDeptTree();
 }

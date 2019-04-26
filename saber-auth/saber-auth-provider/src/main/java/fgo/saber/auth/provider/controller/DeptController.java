@@ -2,6 +2,7 @@ package fgo.saber.auth.provider.controller;
 
 import com.github.pagehelper.PageInfo;
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.api.dto.DeptTreeDto;
 import fgo.saber.auth.api.dto.PageDto;
 import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
@@ -65,6 +66,11 @@ public class DeptController {
     @GetMapping("/foot")
     public JsonResult<List<DeptDto>> getDeptFootWithDeptName(String deptName) {
         return JsonResult.success(BeanUtil.toList(deptService.getDeptFootWithDeptName(deptName), DeptDto.class));
+    }
+
+    @GetMapping("/tree")
+    public JsonResult<List<DeptTreeDto>> getDeptTree() {
+        return JsonResult.success(deptService.getDeptOptions());
     }
 
 

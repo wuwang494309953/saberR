@@ -3,20 +3,26 @@ package fgo.saber.auth.provider.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ArrayListMultimap;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Multimap;
 import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.api.dto.DeptTreeDto;
 import fgo.saber.auth.api.param.DeptParam;
+import fgo.saber.auth.provider.common.SaberAuthConstant;
 import fgo.saber.auth.provider.dao.DeptMapper;
 import fgo.saber.auth.provider.model.entity.Dept;
 import fgo.saber.common.abst.AbstBaseService;
 import fgo.saber.util.BeanUtil;
 import fgo.saber.util.BeanValidator;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zq
@@ -75,4 +81,30 @@ public class DeptServiceImpl extends AbstBaseService<Dept> {
         return deptMapper.getDeptFootWithDeptName(deptName);
     }
 
+    public List<DeptTreeDto> getDeptOptions() {
+        List<Dept> depts = deptMapper.selectAll();
+        List<DeptTreeDto> deptDtos = BeanUtil.toList(depts, DeptTreeDto.class);
+
+        Multimap<Long, DeptTreeDto> deptTreeDtoMultimap = ArrayListMultimap.create();
+        List<DeptTreeDto> rootList = Lists.newArrayList();
+        deptDtos.forEach(deptTreeDto -> {
+            deptTreeDtoMultimap.put(deptTreeDto.getParentId(), deptTreeDto);
+            if (deptTreeDto.getParentId().equals(SaberAuthConstant.root)) {
+                rootList.add(deptTreeDto);
+            }
+        });
+        deptDtos.sort(Comparator.comparingInt(DeptTreeDto::getSeq));
+        transformDeptTree(rootList, deptTreeDtoMultimap);
+        return rootList;
+    }
+
+    private void transformDeptTree(List<DeptTreeDto> deptTreeDtos, Multimap<Long, DeptTreeDto> deptTreeDtoMultimap) {
+        for (DeptTreeDto deptTreeDto : deptTreeDtos) {
+            List<DeptTreeDto> parentDepts = (List<DeptTreeDto>) deptTreeDtoMultimap.get(deptTreeDto.getDeptId());
+            if (CollectionUtils.isNotEmpty(parentDepts)) {
+                deptTreeDto.setChild(parentDepts);
+            }
+            transformDeptTree(parentDepts, deptTreeDtoMultimap);
+        }
+    }
 }

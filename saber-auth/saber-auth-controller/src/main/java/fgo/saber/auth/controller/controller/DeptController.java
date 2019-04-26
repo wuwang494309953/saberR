@@ -1,11 +1,13 @@
 package fgo.saber.auth.controller.controller;
 
 import fgo.saber.auth.api.cloudservice.DeptCloudService;
-import fgo.saber.auth.api.dto.DeptDto;
+import fgo.saber.auth.api.dto.DeptTreeDto;
 import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.base.json.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author zq
@@ -48,6 +50,11 @@ public class DeptController {
 
     @GetMapping("/foot")
     public JsonResult getDeptFootWithDeptName(String deptName) {
-        return JsonResult.success(deptCloudService.getDeptFootWithDeptName(deptName));
+        return deptCloudService.getDeptFootWithDeptName(deptName);
+    }
+
+    @GetMapping("/tree")
+    public JsonResult<List<DeptTreeDto>> getDeptTree() {
+        return deptCloudService.getDeptTree();
     }
 }

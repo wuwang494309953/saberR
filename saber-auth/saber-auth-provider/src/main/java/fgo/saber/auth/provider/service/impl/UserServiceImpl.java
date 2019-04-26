@@ -80,7 +80,7 @@ public class UserServiceImpl extends AbstBaseService<User> {
             oldUser.setOperateIp("127.0.0.1");
             oldUser.setOperator("admin");
             BeanUtil.overWrite(oldUser, userParam);
-            userMapper.insertSelective(oldUser);
+            userMapper.updateByPrimaryKeySelective(oldUser);
         }
 
     }
