@@ -16,6 +16,7 @@ feign:
   name: saber-auth-provider
   httpclient:
     enabled: true
+    connection-timeout: 5000
 eureka:
   client:
     service-url:

@@ -22,7 +22,7 @@
     ${alias}.role_id, ${alias}.name, ${alias}.operate_ip, ${alias}.operate_time, ${alias}.operator, ${alias}.remark, ${alias}.status, ${alias}.type
   </sql>
 
-  <select id="findRoleList" resultType="fgo.saber.auth.provider.model.entity.Role">
+  <select id="findRoleList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from sb_role sr

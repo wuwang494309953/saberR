@@ -60,6 +60,9 @@
       <if test="deptParam.name != null">
         sd.name like concat('%', #{deptParam.name}, '%')
       </if>
+      <if test="deptParam.remark != null">
+        and sd.remark like concat('%', #{deptParam.remark}, '%')
+      </if>
     </where>
   </select>
 
