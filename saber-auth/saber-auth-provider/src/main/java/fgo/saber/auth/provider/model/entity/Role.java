@@ -1,5 +1,6 @@
 package fgo.saber.auth.provider.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import fgo.saber.common.mybatis.ext.SnowFlakeId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class Role {
     @Id
     @KeySql(genId = SnowFlakeId.class)
     @Column(name = "`role_id`")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Long roleId;
 
     @Column(name = "`name`")

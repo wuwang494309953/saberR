@@ -1,12 +1,10 @@
 package fgo.saber.auth.provider.controller;
 
-import com.google.common.base.Preconditions;
+import fgo.saber.auth.api.dto.PermissionModuleTreeDto;
 import fgo.saber.auth.api.param.PermissionModuleParam;
 import fgo.saber.auth.provider.model.entity.PermissionModule;
 import fgo.saber.auth.provider.service.impl.PermissionModuleServiceImpl;
 import fgo.saber.base.json.JsonResult;
-import fgo.saber.util.BeanUtil;
-import fgo.saber.util.BeanValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +20,7 @@ import java.util.List;
  */
 @Api(value = "PermissionModuleController", description = "权限模块控制器")
 @RestController
-@RequestMapping("permission_module")
+@RequestMapping("/permission_module")
 @Validated
 public class PermissionModuleController {
 
@@ -31,14 +29,16 @@ public class PermissionModuleController {
 
     @ApiOperation(value="保存权限模块", notes="permissionId 为空时新增,否则更新")
     @PostMapping("/save")
-    public JsonResult save(@RequestBody PermissionModuleParam param) {
-        BeanValidator.check(param);
-        PermissionModule permissionModule = BeanUtil.to(param, PermissionModule.class);
-        Preconditions.checkNotNull(permissionModule, "转换后的权限模块信息为Null");
-        if (param.getPermissionModuleId() == null) {
-            return JsonResult.success(permissionModuleService.insertSelective(permissionModule));
-        }
-        return JsonResult.success(permissionModuleService.updateByPrimaryKeySelective(permissionModule));
+    public JsonResult save(PermissionModuleParam param) {
+        permissionModuleService.save(param);
+        return JsonResult.success("保存权限模块成功");
+    }
+
+    @ApiOperation(value="删除权限模块")
+    @PostMapping("/del")
+    public JsonResult del(Long permissionModuleId) {
+        permissionModuleService.deleteByPrimaryKey(permissionModuleId);
+        return JsonResult.success("删除权限模块成功");
     }
 
     @ApiOperation(value="根据角色id获取权限点模块")
@@ -53,6 +53,11 @@ public class PermissionModuleController {
     public JsonResult findPermissionModuleWithParentId(@PathVariable(name = "parentId", required = false) Long parentId) {
         parentId = parentId == null ? 0 : parentId;
         return JsonResult.success(permissionModuleService.findPermissionModuleWithParentId(parentId));
+    }
+
+    @GetMapping("/tree")
+    public JsonResult<List<PermissionModuleTreeDto>> getDeptTree() {
+        return JsonResult.success(permissionModuleService.getpermissionModuleTree());
     }
 
 }

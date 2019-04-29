@@ -1,15 +1,21 @@
 package fgo.saber.auth.provider.model.entity;
 
 import fgo.saber.common.mybatis.ext.SnowFlakeId;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import tk.mybatis.mapper.annotation.KeySql;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
-import javax.persistence.*;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "`sb_permission_module`")
 public class PermissionModule {
     @Id

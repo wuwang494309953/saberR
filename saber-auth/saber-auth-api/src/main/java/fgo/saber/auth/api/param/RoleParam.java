@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class RoleParam {
+public class RoleParam extends PageParam {
 
     private Long roleId;
 

@@ -53,7 +53,7 @@ public interface DeptCloudService {
      * @return
      */
     @PostMapping("/del")
-    JsonResult<Integer> delDeptWithId(@NotNull @RequestParam(name = "deptId") Long deptId);
+    JsonResult<Integer> delDeptWithId(@RequestParam(name = "deptId") Long deptId);
 
     /**
      * 保存部门

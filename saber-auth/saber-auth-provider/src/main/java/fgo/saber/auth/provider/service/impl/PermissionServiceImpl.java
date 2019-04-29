@@ -7,6 +7,7 @@ import fgo.saber.auth.api.param.PermissionParam;
 import fgo.saber.auth.provider.dao.PermissionMapper;
 import fgo.saber.auth.provider.model.entity.Permission;
 import fgo.saber.common.abst.AbstBaseService;
+import fgo.saber.util.BeanValidator;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,11 @@ public class PermissionServiceImpl extends AbstBaseService<Permission> {
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
         return new PageInfo<>(permissionMapper.findPermissionList(permissionParam));
+    }
+
+    public void save(PermissionParam permissionParam) {
+        BeanValidator.check(permissionParam);
+
     }
 
     public List<Permission> findPermissionWithModuleId(Long permissionModuleId) {
