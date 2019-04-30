@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 /**
  * @author zq
  * @date 2019/1/28
@@ -26,11 +24,7 @@ public class PermissionDto {
 
     private String name;
 
-    private String operateIp;
-
-    private Date operateTime;
-
-    private String operator;
+    private String permissionModuleName;
 
     private String remark;
 

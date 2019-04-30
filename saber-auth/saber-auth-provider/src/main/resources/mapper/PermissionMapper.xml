@@ -30,10 +30,12 @@
     ${alias}.seq, ${alias}.status, ${alias}.type, ${alias}.url
   </sql>
 
-  <select id="findPermissionList" resultMap="BaseResultMap">
+  <select id="findPermissionList" resultType="fgo.saber.auth.api.dto.PermissionDto">
     select
-    <include refid="Base_Column_List"/>
+      sp.permission_id permissionId, sp.permission_module_id permissionModuleId, sp.name, sp.remark,
+      sp.seq, sp.status, sp.type, sp.url, spm.name permissionModuleName
     from sb_permission sp
+    left join sb_permission_module spm on spm.permission_module_id = sp.permission_module_id
     <where>
       <if test="name != null">
         sr.name like concat('%', #{name}, '%')

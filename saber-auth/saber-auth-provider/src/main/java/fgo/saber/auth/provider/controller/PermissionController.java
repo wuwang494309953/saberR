@@ -1,16 +1,13 @@
 package fgo.saber.auth.provider.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.google.common.base.Preconditions;
 import fgo.saber.auth.api.dto.PageDto;
-import fgo.saber.auth.api.dto.UserDto;
+import fgo.saber.auth.api.dto.PermissionDto;
 import fgo.saber.auth.api.param.PageParam;
 import fgo.saber.auth.api.param.PermissionParam;
 import fgo.saber.auth.provider.model.entity.Permission;
 import fgo.saber.auth.provider.service.impl.PermissionServiceImpl;
 import fgo.saber.base.json.JsonResult;
-import fgo.saber.util.BeanUtil;
-import fgo.saber.util.BeanValidator;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -37,13 +34,8 @@ public class PermissionController {
     @ApiOperation(value="保存权限点", notes="permissionId 为空时新增,否则更新")
     @PostMapping("/save")
     public JsonResult<Integer> save(@RequestBody PermissionParam param) {
-        BeanValidator.check(param);
-        Permission permission = BeanUtil.to(param, Permission.class);
-        Preconditions.checkNotNull(permission, "转换后的权限点信息为Null");
-        if (param.getPermissionId() == null) {
-            return JsonResult.success(permissionService.insertSelective(permission));
-        }
-        return JsonResult.success(permissionService.updateByPrimaryKeySelective(permission));
+        permissionService.save(param);
+        return JsonResult.success("保存权限成功");
     }
 
     @ApiOperation(value="删除权限点")
@@ -56,10 +48,9 @@ public class PermissionController {
     @ApiOperation(value="获取权限点")
     @GetMapping("/list")
     public JsonResult<PageDto> findRoles(PermissionParam permissionParam, PageParam pageParam) {
-        PageInfo<Permission> rolePageInfo = permissionService.findPermissionList(permissionParam, pageParam);
+        PageInfo<PermissionDto> rolePageInfo = permissionService.findPermissionList(permissionParam, pageParam);
 
-        List<UserDto> roleList = BeanUtil.toList(rolePageInfo.getList(), UserDto.class);
-        PageDto pageDto = new PageDto<>(rolePageInfo.getTotal(), roleList);
+        PageDto pageDto = new PageDto<>(rolePageInfo.getTotal(), rolePageInfo.getList());
         return JsonResult.success(pageDto);
     }
 
