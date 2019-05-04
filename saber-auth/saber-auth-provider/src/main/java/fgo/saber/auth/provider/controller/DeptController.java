@@ -8,7 +8,6 @@ import fgo.saber.auth.api.param.DeptParam;
 import fgo.saber.auth.provider.service.impl.DeptServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanUtil;
-import fgo.saber.util.BeanValidator;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -58,7 +57,6 @@ public class DeptController {
 
     @PostMapping("/save")
     public JsonResult<Integer> saveDept(DeptParam deptParam) {
-        BeanValidator.check(deptParam);
         deptService.save(deptParam);
         return JsonResult.success("保存成功");
     }

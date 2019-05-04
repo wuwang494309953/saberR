@@ -42,7 +42,7 @@ public class PermissionController {
     @PostMapping("/del")
     public JsonResult<Integer> del(@NotNull(message = "权限点模块id不能为空") @ApiParam(value = "权限点Id", required = true) Long permissionId) {
         permissionService.deleteByPrimaryKey(permissionId);
-        return JsonResult.success();
+        return JsonResult.success("权限删除成功");
     }
 
     @ApiOperation(value="获取权限点")

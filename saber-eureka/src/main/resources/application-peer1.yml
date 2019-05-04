@@ -8,8 +8,8 @@ eureka:
     hostname: peer1
     home-page-url: http://${eureka.hostname}:${server.port}
   client:
-    service-url:
-      defaultZone: http://peer2:8502/eureka/, http://peer3:8503/eureka/
+#    service-url:
+    ##      defaultZone: http://peer2:8502/eureka/, http://peer3:8503/eureka/
     register-with-eureka: false
     fetch-registry: false
   server:
