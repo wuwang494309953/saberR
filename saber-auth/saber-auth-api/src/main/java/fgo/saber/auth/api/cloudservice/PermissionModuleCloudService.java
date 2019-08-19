@@ -16,7 +16,7 @@ import java.util.List;
  * @author zq
  * @date 2019/1/28
  */
-@FeignClient(value = "${feign.name}", path = "/permission_module")
+@FeignClient(value = "saber-auth-provider", path = "/permission_module")
 public interface PermissionModuleCloudService {
 
     /**

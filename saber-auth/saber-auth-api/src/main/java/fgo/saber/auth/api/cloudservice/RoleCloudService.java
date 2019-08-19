@@ -19,7 +19,7 @@ import java.util.List;
  * @author zq
  * @date 2019/1/28
  */
-@FeignClient(value = "${feign.name}", path = "/role")
+@FeignClient(value = "saber-auth-provider", path = "/role")
 public interface RoleCloudService {
 
     /**

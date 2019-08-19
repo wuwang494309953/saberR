@@ -20,9 +20,9 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/11
  */
-@Api(value = "DeptController", description = "部门控制器")
+@Api(value = "DeptController", tags = "部门接口")
 @RestController
-@RequestMapping("dept")
+@RequestMapping("/dept")
 @Validated
 public class DeptController {
 

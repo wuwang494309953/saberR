@@ -20,7 +20,7 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/13
  */
-@FeignClient(value = "${feign.name}")
+@FeignClient(value = "saber-auth-provider")
 public interface UserCloudService {
 
     /**
@@ -68,11 +68,11 @@ public interface UserCloudService {
     JsonResult<Integer> saveUser(UserParam userParam);
 
     /**
-     * 根据手机号查找用户信息
-     * @param phone
+     * 根据手机号/邮箱/用户名查找用户信息
+     * @param keyWorld
      * @return
      */
-    @GetMapping("/user/findUserWithPhone")
-    JsonResult<UserPasswordDto> findUserWithPhone(@RequestParam(name = "phone") String phone);
+    @GetMapping("/user/findUserWithKeyWorld")
+    JsonResult<UserPasswordDto> findUserWithKeyWorld(@RequestParam(name = "keyWorld") String keyWorld);
 
 }

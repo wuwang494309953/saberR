@@ -18,7 +18,7 @@ import java.util.List;
  * @author zq
  * @date 2018/10/24
  */
-@Api(value = "PermissionModuleController", description = "权限模块控制器")
+@Api(value = "PermissionModuleController", tags = "权限模块接口")
 @RestController
 @RequestMapping("/permission_module")
 @Validated
@@ -55,6 +55,7 @@ public class PermissionModuleController {
         return JsonResult.success(permissionModuleService.findPermissionModuleWithParentId(parentId));
     }
 
+    @ApiOperation(value = "获取所有部门的树形数据")
     @GetMapping("/tree")
     public JsonResult<List<PermissionModuleTreeDto>> getDeptTree() {
         return JsonResult.success(permissionModuleService.getpermissionModuleTree());

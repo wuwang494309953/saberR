@@ -21,7 +21,7 @@ import java.util.List;
  * @author zq
  * @date 2018/10/23
  */
-@Api(value = "RoleController", description = "角色控制器")
+@Api(value = "RoleController", tags = "角色接口")
 @RestController
 @RequestMapping("/role")
 @Validated

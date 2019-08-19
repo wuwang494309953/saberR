@@ -13,7 +13,8 @@
         <module>saber-auth-api</module>
         <module>saber-auth-controller</module>
         <module>saber-auth-provider</module>
-    </modules>
+		<module>saber-auth-shiro</module>
+	</modules>
     <artifactId>saber-auth</artifactId>
     
     <dependencies>

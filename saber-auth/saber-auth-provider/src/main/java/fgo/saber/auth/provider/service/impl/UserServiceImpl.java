@@ -15,6 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
+import tk.mybatis.mapper.entity.Example;
+import tk.mybatis.mapper.util.Sqls;
 
 import java.util.Date;
 import java.util.List;
@@ -85,8 +87,13 @@ public class UserServiceImpl extends AbstBaseService<User> {
 
     }
 
-    public User findUserWithPhone(String username) {
-        User user = User.builder().telephone(username).build();
-        return userMapper.selectOne(user);
+    public User findUserWithKeyWorld(String keyworld) {
+        Example example = Example.builder(User.class)
+                .orWhere(Sqls.custom().andEqualTo("telephone", keyworld))
+                .orWhere(Sqls.custom().andEqualTo("mail", keyworld))
+                .orWhere(Sqls.custom().andEqualTo("username", keyworld))
+                .andWhere(Sqls.custom().andEqualTo("status", 1))
+                .build();
+        return userMapper.selectOneByExample(example);
     }
 }

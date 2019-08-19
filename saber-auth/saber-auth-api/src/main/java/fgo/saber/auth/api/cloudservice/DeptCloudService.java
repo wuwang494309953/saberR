@@ -20,7 +20,7 @@ import java.util.List;
  * @author zq
  * @Date 2018/9/11
  */
-@FeignClient(value = "${feign.name}", path = "/dept")
+@FeignClient(value = "saber-auth-provider", path = "/dept")
 public interface DeptCloudService {
 
     /**

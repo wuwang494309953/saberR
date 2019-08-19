@@ -22,7 +22,7 @@ import java.util.List;
  * @author zq
  * @date 2018/10/24
  */
-@Api(value = "PermissionController", description = "权限点控制器")
+@Api(value = "PermissionController", tags = "权限点接口")
 @RestController
 @RequestMapping("/permission")
 @Validated
