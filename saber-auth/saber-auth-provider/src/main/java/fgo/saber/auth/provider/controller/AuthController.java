@@ -9,9 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
-import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotBlank;
 

@@ -3,7 +3,6 @@ package fgo.saber.auth.shiro.realm;
 import fgo.saber.auth.api.cloudservice.AppInfoCloudService;
 import fgo.saber.auth.api.dto.AppInfoDto;
 import fgo.saber.base.json.JsonResult;
-import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;

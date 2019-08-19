@@ -4,7 +4,6 @@ import com.google.common.collect.Sets;
 import fgo.saber.auth.api.cloudservice.UserCloudService;
 import fgo.saber.auth.api.dto.UserPasswordDto;
 import fgo.saber.base.json.JsonResult;
-import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
