@@ -1,6 +1,5 @@
 package fgo.saber.shiro.realm;
 
-import com.google.common.collect.Sets;
 import fgo.saber.shiro.interfaces.SaberUserService;
 import fgo.saber.shiro.model.SbUser;
 import org.apache.shiro.authc.AuthenticationException;
@@ -28,14 +27,20 @@ public class SaberRealm extends AuthorizingRealm {
 
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-        String clientKey = (String) principals.getPrimaryPrincipal();
+        SbUser user = (SbUser) principals.getPrimaryPrincipal();
+
         SimpleAuthorizationInfo info =  new SimpleAuthorizationInfo();
+
         // 根据客户标识（可以是用户名、app id等等） 查询并设置角色
-        Set<String> roles = Sets.newHashSet();
-        info.setRoles(roles);
+        Set<String> roles = saberUserService.getRolesWithUser(user);
+        if (roles != null) {
+            info.setRoles(roles);
+        }
         // 根据客户标识（可以是用户名、app id等等） 查询并设置权限
-        Set<String> permissions = Sets.newHashSet();
-        info.setStringPermissions(permissions);
+        Set<String> permissions = saberUserService.getPermissions(user);
+        if (permissions != null) {
+            info.setStringPermissions(permissions);
+        }
         return info;
     }
 

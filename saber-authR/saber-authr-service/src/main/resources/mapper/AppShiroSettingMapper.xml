@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fgo.saber.authr.service.dao.AppShiroSettingMapper">
+  <resultMap id="BaseResultMap" type="fgo.saber.authr.service.entity.AppShiroSetting">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="setting_id" jdbcType="BIGINT" property="settingId" />
+    <result column="app_id" jdbcType="BIGINT" property="appId" />
+    <result column="shiro_path" jdbcType="VARCHAR" property="shiroPath" />
+    <result column="shiro_auth" jdbcType="VARCHAR" property="shiroAuth" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    setting_id, app_id, shiro_path, shiro_auth, create_time, update_time
+  </sql>
+</mapper>

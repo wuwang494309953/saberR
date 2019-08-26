@@ -4,8 +4,8 @@ spring:
   application:
     name: saber-auth-provider
   datasource:
-    url: jdbc:mysql://192.168.187.201:3306/saber_auth?useUnicode=true&characterEncoding=utf-8&useSSL=false
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.187.201:3306/saber_authr?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
     druid:
@@ -20,7 +20,7 @@ mybatis:
   config-location: classpath:mybatis-config.xml
 logging:
   level:
-    fgo.saber.auth.provider.dao: debug
+    fgo.saber.authr.service.dao: debug
 mapper:
   mappers: tk.mybatis.mapper.common.Mapper
   not-empty: true
