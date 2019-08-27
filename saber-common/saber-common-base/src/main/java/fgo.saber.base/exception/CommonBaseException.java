@@ -1,10 +1,14 @@
 package fgo.saber.base.exception;
 
+import fgo.saber.base.json.JsonResult;
+
 /**
  * @author zq
  * @Date 2018/9/12
  */
 public class CommonBaseException extends RuntimeException {
+
+    private JsonResult result;
 
     public CommonBaseException() {
         super();
@@ -24,5 +28,22 @@ public class CommonBaseException extends RuntimeException {
 
     protected CommonBaseException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
+    }
+
+    public CommonBaseException(JsonResult result) {
+        this.result = result;
+    }
+
+    public CommonBaseException(String message, JsonResult result) {
+        super(message);
+        this.result = result;
+    }
+
+    public JsonResult getResult() {
+        return result;
+    }
+
+    public void setResult(JsonResult result) {
+        this.result = result;
     }
 }

@@ -59,8 +59,17 @@ public class BeanValidator {
     public static void check(Object param) throws ParamException {
         Map<String, String> map = BeanValidator.validateObject(param);
         if (MapUtils.isNotEmpty(map)) {
-            throw new ParamException(map.toString());
+            throw new ParamException(mapToStr(map));
         }
+    }
+
+    private static String mapToStr(Map<String, String> map) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String val : map.values()) {
+            stringBuilder.append(val).append(",");
+        }
+
+        return stringBuilder.toString().substring(0, stringBuilder.lastIndexOf(","));
     }
 
 }

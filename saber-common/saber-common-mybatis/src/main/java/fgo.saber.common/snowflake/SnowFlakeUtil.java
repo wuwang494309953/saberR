@@ -1,5 +1,8 @@
 package fgo.saber.common.snowflake;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * @author zq
  * @Date 2018/9/10
@@ -21,8 +24,16 @@ public class SnowFlakeUtil {
 
     public static void main(String[] args) {
         SnowFlake snowFlake = SnowFlakeUtil.initSnowFlake();
+
+        ExecutorService executorService = Executors.newFixedThreadPool(50);
+
         for (int i = 0; i < 500; i++) {
-            System.out.println(snowFlake.nextId());
+            executorService.execute(new Runnable() {
+                @Override
+                public void run() {
+                    System.out.println(snowFlake.nextId());
+                }
+            });
         }
     }
 

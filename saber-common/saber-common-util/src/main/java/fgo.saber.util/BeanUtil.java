@@ -2,7 +2,7 @@ package fgo.saber.util;
 
 import com.google.common.collect.Lists;
 import fgo.saber.util.exception.CommonUtilException;
-import org.apache.commons.beanutils.PropertyUtils;
+import org.springframework.beans.BeanUtils;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class BeanUtil {
         D dto;
         try {
             dto = clazz.getConstructor(new Class[] {}).newInstance();
-            PropertyUtils.copyProperties(dto, source);
+            BeanUtils.copyProperties(source, dto);
         } catch (Exception e) {
             throw new CommonUtilException("对象转化时发生一个异常", e);
         }
@@ -32,12 +32,20 @@ public class BeanUtil {
         return result;
     }
 
-    public static <D, E> E overWrite(E oldObj, D newObj) {
+    /**
+     * 将新对象复制到老对象上
+     * @param oldObj
+     * @param newObj
+     * @param <D>
+     * @param <E>
+     * @return
+     */
+    public static <D, E> E overWrite(D newObj, E oldObj) {
         if (oldObj == null || newObj == null) {
             return null;
         }
         try {
-            PropertyUtils.copyProperties(oldObj, newObj);
+            BeanUtils.copyProperties(newObj, oldObj);
         } catch (Exception e) {
             throw new CommonUtilException("对象覆盖时发生一个异常", e);
         }
