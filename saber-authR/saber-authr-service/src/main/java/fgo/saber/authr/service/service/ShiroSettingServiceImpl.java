@@ -4,8 +4,8 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import fgo.saber.authr.service.common.AuthResultStatus;
 import fgo.saber.authr.service.dao.AppShiroSettingMapper;
+import fgo.saber.authr.service.model.entity.AppInfo;
 import fgo.saber.authr.service.model.entity.AppShiroSetting;
-import fgo.saber.authr.service.model.param.AppInfoParam;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.ShiroSettingParam;
 import fgo.saber.common.abst.AbstBaseService;
@@ -43,7 +43,7 @@ public class ShiroSettingServiceImpl extends AbstBaseService<AppShiroSetting> {
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
 
-        Example.Builder example = Example.builder(AppInfoParam.class);
+        Example.Builder example = Example.builder(AppInfo.class);
 
         if (StringUtils.isNotBlank(settingParam.getShiroPath())) {
             example.andWhere(Sqls.custom().andLike("shiroPath", "%" + settingParam.getShiroPath() + "%"));

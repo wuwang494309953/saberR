@@ -20,4 +20,12 @@ public class AuthResultStatus {
 
     public static final JsonResult APP_NOT_EXIST = JsonResult.fail(1011, "应用不存在");
 
+    public static final JsonResult PERMISSION_NOT_EXIST = JsonResult.fail(1012, "权限点不存在");
+
+    public static final JsonResult ROLE_NOT_EXIST = JsonResult.fail(1013, "角色不存在");
+
+    public static final JsonResult RESOURCE_NOT_EXIST = JsonResult.fail(1014, "资源不存在");
+
+    public static final JsonResult USER_NOT_EXIST = JsonResult.fail(1015, "用户不存在");
+
 }
