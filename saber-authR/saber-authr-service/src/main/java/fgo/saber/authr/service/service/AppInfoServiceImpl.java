@@ -18,6 +18,7 @@ import tk.mybatis.mapper.entity.Example;
 import tk.mybatis.mapper.util.Sqls;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author zq
@@ -42,7 +43,7 @@ public class AppInfoServiceImpl extends AbstBaseService<AppInfo> {
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
 
-        Example.Builder example = Example.builder(AppInfoParam.class);
+        Example.Builder example = Example.builder(AppInfo.class);
 
         if (StringUtils.isNotBlank(appInfoParam.getAppName())) {
             example.andWhere(Sqls.custom().andLike("appName", "%" + appInfoParam.getAppName() + "%"));
@@ -61,6 +62,7 @@ public class AppInfoServiceImpl extends AbstBaseService<AppInfo> {
         if (appInfoParam.getAppId() == null) {
             AppInfo appInfo = new AppInfo();
             BeanUtil.overWrite(appInfoParam, appInfo);
+            appInfo.setAppSecret(UUID.randomUUID().toString());
             appInfo.setCreateTime(new Date());
             appInfo.setUpdateTime(new Date());
             appInfoMapper.insertSelective(appInfo);

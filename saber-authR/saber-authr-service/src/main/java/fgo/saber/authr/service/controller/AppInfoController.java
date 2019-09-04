@@ -52,4 +52,6 @@ public class AppInfoController {
         return JsonResult.success("删除应用成功");
     }
 
+
+
 }

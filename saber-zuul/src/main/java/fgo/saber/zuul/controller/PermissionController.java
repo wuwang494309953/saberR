@@ -28,7 +28,7 @@ public class PermissionController {
         filterMap.put("/test1", "perms[test1]");
         filterMap.put("/login/in", "anon");
         //把 admin 设置成不需要拦截
-        filterMap.put("/**", "authc");
+//        filterMap.put("/**", "authc");
 
         sbPermissions.updatePermission(filterMap);
         return JsonResult.success(filterMap);

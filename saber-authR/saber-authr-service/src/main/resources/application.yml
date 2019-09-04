@@ -2,7 +2,7 @@ server:
   port: 8601
 spring:
   application:
-    name: saber-auth-provider
+    name: saber-authr-service
   datasource:
     url: jdbc:mysql://192.168.187.201:3306/saber_authr?useUnicode=true&characterEncoding=utf-8&useSSL=false
     driver-class-name: com.mysql.cj.jdbc.Driver
