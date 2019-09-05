@@ -1,5 +1,6 @@
 package fgo.saber.authr.service.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import fgo.saber.common.mybatis.ext.SnowFlakeId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ public class AppShiroSetting {
     /**
      * 配置id
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Id
     @KeySql(genId = SnowFlakeId.class)
     @Column(name = "`setting_id`")
@@ -29,6 +31,7 @@ public class AppShiroSetting {
     /**
      * appId
      */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     @Column(name = "`app_id`")
     private Long appId;
 
