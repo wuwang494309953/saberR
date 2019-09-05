@@ -47,7 +47,7 @@ public class PermissionController {
         if (permission == null) {
             return AuthResultStatus.PERMISSION_NOT_EXIST;
         }
-        permission.setStatus(1);
+        permission.setStatus(0);
         permissionService.updateByPrimaryKeySelective(permission);
         return JsonResult.success("删除权限点成功");
     }

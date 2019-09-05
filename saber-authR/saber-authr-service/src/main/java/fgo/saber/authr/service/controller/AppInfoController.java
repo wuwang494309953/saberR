@@ -47,7 +47,7 @@ public class AppInfoController {
         if (appInfo == null) {
             return AuthResultStatus.APP_NOT_EXIST;
         }
-        appInfo.setStatus(1);
+        appInfo.setStatus(0);
         appInfoService.updateByPrimaryKeySelective(appInfo);
         return JsonResult.success("删除应用成功");
     }

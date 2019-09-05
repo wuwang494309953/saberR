@@ -14,8 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.util.Sqls;
 
 import java.util.Date;
 
@@ -42,19 +40,7 @@ public class GatewaySettingServiceImpl extends AbstBaseService<AppGatewaySetting
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
 
-        Example.Builder example = Example.builder(AppGatewaySetting.class);
-
-        if (StringUtils.isNotBlank(gatewaySettingParam.getAppServiceId())) {
-            example.andWhere(Sqls.custom().andLike("appServiceId", "%" + gatewaySettingParam.getAppServiceId() + "%"));
-        }
-        if (StringUtils.isNotBlank(gatewaySettingParam.getGatewayPath())) {
-            example.andWhere(Sqls.custom().andLike("gatewayPath", "%" + gatewaySettingParam.getGatewayPath() + "%"));
-        }
-        if (gatewaySettingParam.getAppId() != null) {
-            example.andWhere(Sqls.custom().andEqualTo("appId", gatewaySettingParam.getAppId()));
-        }
-
-        return new PageInfo<>(appGatewaySettingMapper.selectByExample(example.build()));
+        return new PageInfo<>(appGatewaySettingMapper.getAppGatewaySettingNav(gatewaySettingParam));
     }
 
     public void save(GatewaySettingParam gatewaySettingParam) {

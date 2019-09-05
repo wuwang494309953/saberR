@@ -47,7 +47,7 @@ public class UserController {
         if (user == null) {
             return AuthResultStatus.USER_NOT_EXIST;
         }
-        user.setStatus(1);
+        user.setStatus(0);
         userService.updateByPrimaryKeySelective(user);
         return JsonResult.success("删除用户成功");
     }
