@@ -24,13 +24,15 @@
     gateway_id, app_id, app_service_id, gateway_path, create_time, update_time
   </sql>
 
-	<sql id="AppName_Column_List">
-		gateway_id, app_id, app_service_id, gateway_path, create_time, update_time, app_name
+	<sql id="Alias_Column_List">
+		${alias}.gateway_id, ${alias}.app_id, ${alias}.app_service_id, ${alias}.gateway_path, ${alias}.create_time, ${alias}.update_time
 	</sql>
 
 	<select id="getAppGatewaySettingNav" resultMap="AppNameResultMap">
 		select
-			<include refid="AppName_Column_List"/>
+		<include refid="Alias_Column_List">
+			<property name="alias" value="ags"/>
+		</include> , ai.app_name
 		from app_gateway_setting ags
 		left join app_info ai on ai.app_id = ags.app_id
 		<where>
