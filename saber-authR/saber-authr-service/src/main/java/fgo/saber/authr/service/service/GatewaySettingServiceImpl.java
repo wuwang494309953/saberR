@@ -7,6 +7,7 @@ import fgo.saber.authr.service.dao.AppGatewaySettingMapper;
 import fgo.saber.authr.service.model.entity.AppGatewaySetting;
 import fgo.saber.authr.service.model.param.GatewaySettingParam;
 import fgo.saber.authr.service.model.param.PageParam;
+import fgo.saber.authr.service.model.vo.AppGatewaySettingVO;
 import fgo.saber.common.abst.AbstBaseService;
 import fgo.saber.util.BeanUtil;
 import fgo.saber.util.SbPreconditions;
@@ -32,7 +33,7 @@ public class GatewaySettingServiceImpl extends AbstBaseService<AppGatewaySetting
         return appGatewaySettingMapper;
     }
 
-    public PageInfo<AppGatewaySetting> findSettingList(GatewaySettingParam gatewaySettingParam, PageParam pageParam) {
+    public PageInfo<AppGatewaySettingVO> findSettingList(GatewaySettingParam gatewaySettingParam, PageParam pageParam) {
         String orderStr = pageParam.sortStr();
         if (StringUtils.isAnyBlank(pageParam.getSortKey(), pageParam.getSortValue())) {
             //默认根据时间排序

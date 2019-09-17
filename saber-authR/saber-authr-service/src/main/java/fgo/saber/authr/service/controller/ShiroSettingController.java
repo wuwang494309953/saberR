@@ -1,9 +1,9 @@
 package fgo.saber.authr.service.controller;
 
 import com.github.pagehelper.PageInfo;
-import fgo.saber.authr.service.model.entity.AppShiroSetting;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.ShiroSettingParam;
+import fgo.saber.authr.service.model.vo.AppShiroSettingVO;
 import fgo.saber.authr.service.model.vo.PageVO;
 import fgo.saber.authr.service.service.ShiroSettingServiceImpl;
 import fgo.saber.base.json.JsonResult;
@@ -28,8 +28,8 @@ public class ShiroSettingController {
 
     @GetMapping("/list")
     public JsonResult list(ShiroSettingParam settingParam, PageParam pageParam) {
-        PageInfo<AppShiroSetting> shiroSettingList = shiroSettingService.findShiroSettingList(settingParam, pageParam);
-        PageVO<AppShiroSetting> pageDto = new PageVO<>(shiroSettingList.getTotal(), shiroSettingList.getList());
+        PageInfo<AppShiroSettingVO> shiroSettingList = shiroSettingService.findShiroSettingList(settingParam, pageParam);
+        PageVO<AppShiroSettingVO> pageDto = new PageVO<>(shiroSettingList.getTotal(), shiroSettingList.getList());
         return JsonResult.success(pageDto);
     }
 

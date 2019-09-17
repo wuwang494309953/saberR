@@ -12,10 +12,39 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+	<resultMap id="AppNameResultMap" type="fgo.saber.authr.service.model.vo.AppShiroSettingVO" extends="BaseResultMap">
+		<result column="app_name" jdbcType="VARCHAR" property="appName" />
+	</resultMap>
+
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
     setting_id, app_id, shiro_path, shiro_auth, create_time, update_time
   </sql>
+
+	<sql id="Alias_Column_List">
+		${alias}.setting_id, ${alias}.app_id, ${alias}.shiro_path, ${alias}.shiro_auth, ${alias}.create_time, ${alias}.update_time
+	</sql>
+
+	<select id="getAppShiroSettingNav" resultMap="AppNameResultMap">
+		select
+			<include refid="Alias_Column_List">
+				<property name="alias" value="ass"/>
+			</include> , ai.app_name
+		from app_shiro_setting ass
+		left join app_info ai on ai.app_id = ass.app_id
+		<where>
+			<if test="shiroPath != null &amp; shiroPath != ''">
+				ass.shiro_path like concat('%', #{shiroPath} , '%')
+			</if>
+			<if test="shiroAuth != null &amp; shiroAuth != ''">
+				ass.shiro_auth like concat('%', #{shiroAuth} , '%')
+			</if>
+			<if test="appId != null &amp; appId != ''">
+				ass.app_id = #{appId}
+			</if>
+		</where>
+	</select>
 </mapper>

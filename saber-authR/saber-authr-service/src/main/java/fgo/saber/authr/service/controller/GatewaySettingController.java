@@ -1,9 +1,9 @@
 package fgo.saber.authr.service.controller;
 
 import com.github.pagehelper.PageInfo;
-import fgo.saber.authr.service.model.entity.AppGatewaySetting;
 import fgo.saber.authr.service.model.param.GatewaySettingParam;
 import fgo.saber.authr.service.model.param.PageParam;
+import fgo.saber.authr.service.model.vo.AppGatewaySettingVO;
 import fgo.saber.authr.service.model.vo.PageVO;
 import fgo.saber.authr.service.service.GatewaySettingServiceImpl;
 import fgo.saber.base.json.JsonResult;
@@ -28,8 +28,8 @@ public class GatewaySettingController {
 
     @GetMapping("/list")
     public JsonResult list(GatewaySettingParam gatewaySettingParam, PageParam pageParam) {
-        PageInfo<AppGatewaySetting> gatewaySettingPageInfo = gatewaySettingService.findSettingList(gatewaySettingParam, pageParam);
-        PageVO<AppGatewaySetting> pageDto = new PageVO<>(gatewaySettingPageInfo.getTotal(), gatewaySettingPageInfo.getList());
+        PageInfo<AppGatewaySettingVO> gatewaySettingPageInfo = gatewaySettingService.findSettingList(gatewaySettingParam, pageParam);
+        PageVO<AppGatewaySettingVO> pageDto = new PageVO<>(gatewaySettingPageInfo.getTotal(), gatewaySettingPageInfo.getList());
         return JsonResult.success(pageDto);
     }
 
