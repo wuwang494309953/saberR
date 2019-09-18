@@ -20,6 +20,9 @@ public class RoleParam {
     @NotBlank(message = "roleName不能为空")
     private String roleName;
 
+    @NotBlank(message = "roleValue不能为空")
+    private String roleValue;
+
     private String remark;
 
     @NotNull(message = "status不能为空")

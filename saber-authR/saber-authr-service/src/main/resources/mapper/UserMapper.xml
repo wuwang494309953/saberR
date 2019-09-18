@@ -6,6 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="user_id" jdbcType="BIGINT" property="userId" />
+	  <result column="app_id" jdbcType="BIGINT" property="appId" />
     <result column="mail" jdbcType="VARCHAR" property="mail" />
     <result column="telephone" jdbcType="VARCHAR" property="telephone" />
     <result column="username" jdbcType="VARCHAR" property="username" />
@@ -15,10 +16,45 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+	<resultMap id="AppNameResultMap" type="fgo.saber.authr.service.model.vo.UserVO" extends="BaseResultMap">
+		<result column="app_name" jdbcType="VARCHAR" property="appName" />
+	</resultMap>
+
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
-    user_id, mail, telephone, username, password, remark, status, create_time, update_time
+    user_id, app_id, mail, telephone, username, password, remark, status, create_time, update_time
   </sql>
+
+	<sql id="Alias_Column_List">
+		${alias}.user_id, ${alias}.app_id, ${alias}.mail, ${alias}.telephone, ${alias}.username, ${alias}.password, ${alias}.remark, ${alias}.status, ${alias}.create_time, ${alias}.update_time
+	</sql>
+
+	<select id="getUserNav" resultMap="AppNameResultMap">
+		select
+		<include refid="Alias_Column_List">
+			<property name="alias" value="u"/>
+		</include> , ai.app_name
+		from user u
+		left join app_info ai on ai.app_id = u.app_id
+		<where>
+			<if test="mail != null &amp; mail != ''">
+				and u.mail like concat('%', #{mail} , '%')
+			</if>
+			<if test="telephone != null &amp; telephone != ''">
+				and u.telephone like concat('%', #{telephone} , '%')
+			</if>
+			<if test="username != null &amp; username != ''">
+				and u.username like concat('%', #{username} , '%')
+			</if>
+			<if test="status != null">
+				and u.status = #{status}
+			</if>
+			<if test="appId != null &amp; appId != ''">
+				and u.app_id = #{appId}
+			</if>
+		</where>
+	</select>
 </mapper>

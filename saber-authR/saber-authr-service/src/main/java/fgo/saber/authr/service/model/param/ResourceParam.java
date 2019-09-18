@@ -14,6 +14,9 @@ public class ResourceParam {
 
     private Long resourceId;
 
+    @NotNull(message = "appId不能为空")
+    private Long appId;
+
     @NotNull(message = "roleId不能为空")
     private Long roleId;
 

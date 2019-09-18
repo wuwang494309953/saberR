@@ -1,10 +1,10 @@
 package fgo.saber.authr.service.controller;
 
 import com.github.pagehelper.PageInfo;
-import fgo.saber.authr.service.model.entity.Role;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.RoleParam;
 import fgo.saber.authr.service.model.vo.PageVO;
+import fgo.saber.authr.service.model.vo.RoleVO;
 import fgo.saber.authr.service.service.RoleServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanValidator;
@@ -28,8 +28,8 @@ public class RoleController {
 
     @GetMapping("/list")
     public JsonResult list(RoleParam roleParam, PageParam pageParam) {
-        PageInfo<Role> roleList = roleService.findRoleList(roleParam, pageParam);
-        PageVO<Role> pageDto = new PageVO<>(roleList.getTotal(), roleList.getList());
+        PageInfo<RoleVO> roleList = roleService.findRoleList(roleParam, pageParam);
+        PageVO<RoleVO> pageDto = new PageVO<>(roleList.getTotal(), roleList.getList());
         return JsonResult.success(pageDto);
     }
 

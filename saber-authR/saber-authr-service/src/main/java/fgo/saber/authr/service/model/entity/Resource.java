@@ -27,11 +27,12 @@ public class Resource {
     private Long resourceId;
 
     /**
-     * 角色id
+     * appId
      */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @Column(name = "`role_id`")
-    private Long roleId;
+    @Column(name = "`app_id`")
+    private Long appId;
+
 
     /**
      * 资源名

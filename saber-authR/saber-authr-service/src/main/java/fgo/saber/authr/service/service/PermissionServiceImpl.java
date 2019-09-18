@@ -48,10 +48,6 @@ public class PermissionServiceImpl extends AbstBaseService<Permission> {
             example.andWhere(Sqls.custom().andLike("permissionName", "%" + permissionParam.getPermissionName() + "%"));
         }
 
-        if (permissionParam.getRoleId() != null) {
-            example.andWhere(Sqls.custom().andEqualTo("roleId", permissionParam.getRoleId()));
-        }
-
         if (permissionParam.getStatus() != null) {
             example.andWhere(Sqls.custom().andEqualTo("status", permissionParam.getStatus()));
         }

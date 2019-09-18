@@ -37,13 +37,13 @@
 		left join app_info ai on ai.app_id = ags.app_id
 		<where>
 			<if test="appServiceId != null &amp; appServiceId != ''">
-				ags.app_serviceId like concat('%', #{appServiceId} , '%')
+				and ags.app_serviceId like concat('%', #{appServiceId} , '%')
 			</if>
 			<if test="gatewayPath != null &amp; gatewayPath != ''">
-				ags.gateway_path like concat('%', #{gatewayPath} , '%')
+				and ags.gateway_path like concat('%', #{gatewayPath} , '%')
 			</if>
 			<if test="appId != null &amp; appId != ''">
-				ags.app_id = #{appId}
+				and ags.app_id = #{appId}
 			</if>
 		</where>
 	</select>

@@ -14,6 +14,9 @@ public class UserParam {
 
     private Long userId;
 
+    @NotNull(message = "appId不能为空")
+    private Long appId;
+
     private String mail;
 
     private String telephone;

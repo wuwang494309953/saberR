@@ -14,11 +14,14 @@ public class PermissionParam {
 
     private Long permissionId;
 
-    @NotNull(message = "roleId不能为空")
-    private Long roleId;
+    @NotNull(message = "appId不能为空")
+    private Long appId;
 
     @NotBlank(message = "permissionName不能为空")
     private String permissionName;
+
+    @NotBlank(message = "permissionValue不能为空")
+    private String permissionValue;
 
     private String remark;
 

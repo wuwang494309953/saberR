@@ -26,6 +26,13 @@ public class User {
     @Column(name = "`user_id`")
     private Long userId;
 
+    /**
+     * appId
+     */
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @Column(name = "`app_id`")
+    private Long appId;
+
     @Column(name = "`mail`")
     private String mail;
 

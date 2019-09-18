@@ -26,12 +26,18 @@ public class Permission {
     @Column(name = "`permission_id`")
     private Long permissionId;
 
+    /**
+     * appId
+     */
     @JsonFormat(shape = JsonFormat.Shape.STRING)
-    @Column(name = "`role_id`")
-    private Long roleId;
+    @Column(name = "`app_id`")
+    private Long appId;
 
     @Column(name = "`permission_name`")
     private String permissionName;
+
+    @Column(name = "`permission_value`")
+    private String permissionValue;
 
     @Column(name = "`remark`")
     private String remark;

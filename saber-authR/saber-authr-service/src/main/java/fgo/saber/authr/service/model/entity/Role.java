@@ -40,6 +40,12 @@ public class Role {
     private String roleName;
 
     /**
+     * 角色值
+     */
+    @Column(name = "`role_name`")
+    private String roleValue;
+
+    /**
      * 备注
      */
     @Column(name = "`remark`")

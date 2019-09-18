@@ -6,7 +6,7 @@
       WARNING - @mbg.generated
     -->
     <id column="resource_id" jdbcType="BIGINT" property="resourceId" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+	  <result column="app_id" jdbcType="BIGINT" property="appId" />
     <result column="resource_name" jdbcType="VARCHAR" property="resourceName" />
     <result column="resource_value" jdbcType="VARCHAR" property="resourceValue" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -16,6 +16,6 @@
     <!--
       WARNING - @mbg.generated
     -->
-    resource_id, role_id, resource_name, resource_value, create_time, update_time
+    resource_id, app_id, resource_name, resource_value, create_time, update_time
   </sql>
 </mapper>

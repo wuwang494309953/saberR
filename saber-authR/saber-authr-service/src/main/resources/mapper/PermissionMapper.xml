@@ -6,8 +6,9 @@
       WARNING - @mbg.generated
     -->
     <id column="permission_id" jdbcType="BIGINT" property="permissionId" />
-    <result column="role_id" jdbcType="BIGINT" property="roleId" />
+	  <result column="app_id" jdbcType="BIGINT" property="appId" />
     <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+	  <result column="permission_value" jdbcType="VARCHAR" property="permissionValue" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
@@ -17,6 +18,6 @@
     <!--
       WARNING - @mbg.generated
     -->
-    permission_id, role_id, permission_name, remark, status, create_time, update_time
+    permission_id, app_id, permission_name, permission_value, remark, status, create_time, update_time
   </sql>
 </mapper>

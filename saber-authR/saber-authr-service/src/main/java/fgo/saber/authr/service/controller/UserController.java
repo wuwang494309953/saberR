@@ -6,6 +6,7 @@ import fgo.saber.authr.service.model.entity.User;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.UserParam;
 import fgo.saber.authr.service.model.vo.PageVO;
+import fgo.saber.authr.service.model.vo.UserVO;
 import fgo.saber.authr.service.service.UserServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanValidator;
@@ -29,8 +30,8 @@ public class UserController {
 
     @GetMapping("/list")
     public JsonResult list(UserParam userParam, PageParam pageParam) {
-        PageInfo<User> userList = userService.findUserList(userParam, pageParam);
-        PageVO<User> pageDto = new PageVO<>(userList.getTotal(), userList.getList());
+        PageInfo<UserVO> userList = userService.findUserList(userParam, pageParam);
+        PageVO<UserVO> pageDto = new PageVO<>(userList.getTotal(), userList.getList());
         return JsonResult.success(pageDto);
     }
 
