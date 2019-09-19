@@ -42,7 +42,7 @@ public class Role {
     /**
      * 角色值
      */
-    @Column(name = "`role_name`")
+    @Column(name = "`role_value`")
     private String roleValue;
 
     /**
