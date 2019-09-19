@@ -14,10 +14,41 @@
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
+
+	<resultMap id="AppNameResultMap" type="fgo.saber.authr.service.model.vo.PermissionVO" extends="BaseResultMap">
+		<result column="app_name" jdbcType="VARCHAR" property="appName" />
+	</resultMap>
+
   <sql id="Base_Column_List">
     <!--
       WARNING - @mbg.generated
     -->
     permission_id, app_id, permission_name, permission_value, remark, status, create_time, update_time
   </sql>
+
+	<sql id="Alias_Column_List">
+		${alias}.permission_id, ${alias}.app_id, ${alias}.permission_name, ${alias}.permission_value, ${alias}.remark, ${alias}.status, ${alias}.create_time, ${alias}.update_time
+	</sql>
+
+	<select id="getPermissionNav" resultMap="AppNameResultMap">
+		select
+		<include refid="Alias_Column_List">
+			<property name="alias" value="p"/>
+		</include> , ai.app_name
+		from permission p
+		left join app_info ai on ai.app_id = p.app_id
+		<where>
+			<if test="permissionName != null &amp; permissionName != ''">
+				and p.permission_name like concat('%', #{permissionName} , '%')
+			</if>
+			<if test="status != null">
+				and p.status = #{status}
+			</if>
+
+			<if test="appId != null &amp; appId != ''">
+				and p.app_id = #{appId}
+			</if>
+		</where>
+	</select>
+
 </mapper>

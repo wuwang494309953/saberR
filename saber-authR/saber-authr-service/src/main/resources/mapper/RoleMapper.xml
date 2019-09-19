@@ -54,4 +54,14 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="findRolesWithAppAndUserId" resultMap="BaseResultMap">
+		select
+			<include refid="Alias_Column_List"><property name="alias" value="r"/></include>
+		from role r
+		inner join user_role ur on ur.role_id = r.role_id
+		where ur.user_id = #{userId}
+		and r.app_id = #{appId}
+		and r.status = 1
+	</select>
 </mapper>

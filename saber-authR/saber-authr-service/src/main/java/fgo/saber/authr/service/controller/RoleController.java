@@ -1,6 +1,7 @@
 package fgo.saber.authr.service.controller;
 
 import com.github.pagehelper.PageInfo;
+import fgo.saber.authr.service.model.entity.Role;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.RoleParam;
 import fgo.saber.authr.service.model.vo.PageVO;
@@ -9,6 +10,7 @@ import fgo.saber.authr.service.service.RoleServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanValidator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/role")
+@Validated
 public class RoleController {
 
     @Autowired
@@ -44,6 +47,17 @@ public class RoleController {
     public JsonResult del(@PathVariable Long roleId) {
         roleService.deleteByPrimaryKey(roleId);
         return JsonResult.success("删除角色成功");
+    }
+
+    @GetMapping("/list/{appId}")
+    public JsonResult listWithApp(@PathVariable Long appId) {
+        Role query = Role.builder().appId(appId).build();
+        return JsonResult.success(roleService.select(query));
+    }
+
+    @GetMapping("/list/{appId}/{userId}")
+    public JsonResult listWithAppAndUser(@PathVariable Long appId, @PathVariable Long userId) {
+        return JsonResult.success(roleService.findRolesWithAppAndUserId(appId, userId));
     }
 
 }

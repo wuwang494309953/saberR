@@ -29,6 +29,10 @@ public abstract class AbstBaseService<T> {
         return getDao().selectByPrimaryKey(id);
     }
 
+    public List<T> select(T t) {
+        return getDao().select(t);
+    }
+
     public List<T> selectAll() {
         return getDao().selectAll();
     }

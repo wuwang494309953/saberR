@@ -7,6 +7,7 @@ import fgo.saber.authr.service.dao.UserMapper;
 import fgo.saber.authr.service.model.entity.User;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.UserParam;
+import fgo.saber.authr.service.model.vo.UserVO;
 import fgo.saber.common.abst.AbstBaseService;
 import fgo.saber.util.BeanUtil;
 import fgo.saber.util.SbPreconditions;
@@ -14,8 +15,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
-import tk.mybatis.mapper.entity.Example;
-import tk.mybatis.mapper.util.Sqls;
 
 import java.util.Date;
 
@@ -34,7 +33,7 @@ public class UserServiceImpl extends AbstBaseService<User> {
         return userMapper;
     }
 
-    public PageInfo<User> findUserList(UserParam userParam, PageParam pageParam) {
+    public PageInfo<UserVO> findUserList(UserParam userParam, PageParam pageParam) {
         String orderStr = pageParam.sortStr();
         if (StringUtils.isAnyBlank(pageParam.getSortKey(), pageParam.getSortValue())) {
             //默认根据时间排序
@@ -42,25 +41,7 @@ public class UserServiceImpl extends AbstBaseService<User> {
         }
         PageHelper.startPage(pageParam.getPageNum(), pageParam.getPageSize(), orderStr);
 
-        Example.Builder example = Example.builder(User.class);
-
-        if (StringUtils.isNotBlank(userParam.getMail())) {
-            example.andWhere(Sqls.custom().andLike("mail", "%" + userParam.getMail() + "%"));
-        }
-
-        if (StringUtils.isNotBlank(userParam.getTelephone())) {
-            example.andWhere(Sqls.custom().andLike("telephone", "%" + userParam.getTelephone() + "%"));
-        }
-
-        if (StringUtils.isNotBlank(userParam.getUsername())) {
-            example.andWhere(Sqls.custom().andLike("username", "%" + userParam.getUsername() + "%"));
-        }
-
-        if (userParam.getStatus() != null) {
-            example.andWhere(Sqls.custom().andEqualTo("status", userParam.getStatus()));
-        }
-
-        return new PageInfo<>(userMapper.selectByExample(example.build()));
+        return new PageInfo<>(userMapper.getUserNav(userParam));
     }
 
     public void save(UserParam userParam) {

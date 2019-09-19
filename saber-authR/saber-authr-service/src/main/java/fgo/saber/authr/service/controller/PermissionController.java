@@ -6,6 +6,7 @@ import fgo.saber.authr.service.model.entity.Permission;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.PermissionParam;
 import fgo.saber.authr.service.model.vo.PageVO;
+import fgo.saber.authr.service.model.vo.PermissionVO;
 import fgo.saber.authr.service.service.PermissionServiceImpl;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.util.BeanValidator;
@@ -29,8 +30,8 @@ public class PermissionController {
 
     @GetMapping("/list")
     public JsonResult list(PermissionParam permissionParam, PageParam pageParam) {
-        PageInfo<Permission> permissionList = permissionService.findPermissionList(permissionParam, pageParam);
-        PageVO<Permission> pageDto = new PageVO<>(permissionList.getTotal(), permissionList.getList());
+        PageInfo<PermissionVO> permissionList = permissionService.findPermissionList(permissionParam, pageParam);
+        PageVO<PermissionVO> pageDto = new PageVO<>(permissionList.getTotal(), permissionList.getList());
         return JsonResult.success(pageDto);
     }
 
