@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zq
@@ -59,5 +60,9 @@ public class PermissionServiceImpl extends AbstBaseService<Permission> {
             permissionMapper.updateByPrimaryKeySelective(permission);
         }
 
+    }
+
+    public List<Permission> findRolesWithAppAndUserId(Long appId, Long roleId) {
+        return permissionMapper.findRolesWithAppAndUserId(appId, roleId);
     }
 }

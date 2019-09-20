@@ -5,12 +5,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
-import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication(scanBasePackages = {"fgo.saber.zuul", "fgo.saber.shiro"})
 @EnableZuulProxy
+@EnableFeignClients(basePackages = "fgo.saber.authr.cloud.service")
 public class ZuulApplication {
 
     @Autowired
@@ -24,8 +25,7 @@ public class ZuulApplication {
     }
 
     @Bean
-    public RouteLocator routeLocator() {
-        System.out.println(123);
+    public CustomRouteLocator routeLocator() {
         return new CustomRouteLocator("", this.zuulProperties);
     }
 }

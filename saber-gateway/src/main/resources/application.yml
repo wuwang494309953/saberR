@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: saber-gateway
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8501/eureka/
+#zuul:
+#  routes:
+#    saber-auth:
+#      path: /saber-auth/**
+#      service-id: saber-auth-provider

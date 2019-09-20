@@ -51,4 +51,14 @@
 		</where>
 	</select>
 
+	<select id="findRolesWithAppAndUserId" resultMap="BaseResultMap">
+		select
+		<include refid="Alias_Column_List"><property name="alias" value="p"/></include>
+		from permission p
+		inner join role_permission rp on rp.permission_id = p.permission_id
+		where rp.role_id = #{roleId}
+		and p.app_id = #{appId}
+		and p.status = 1
+	</select>
+
 </mapper>

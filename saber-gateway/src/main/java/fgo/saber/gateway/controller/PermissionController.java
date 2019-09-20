@@ -1,4 +1,4 @@
-package fgo.saber.zuul.controller;
+package fgo.saber.gateway.controller;
 
 import com.google.common.collect.Maps;
 import fgo.saber.base.json.JsonResult;
@@ -22,7 +22,7 @@ public class PermissionController {
     @Autowired
     public SbPermissions sbPermissions;
 
-    @PostMapping("/refresh")
+    @PostMapping("/change")
     public JsonResult updateFilter() {
         Map<String, String> filterMap = Maps.newLinkedHashMap();
         filterMap.put("/test1", "perms[test1]");

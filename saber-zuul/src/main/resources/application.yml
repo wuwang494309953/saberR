@@ -1,10 +1,18 @@
 spring:
   application:
     name: saber-zuul
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8501/eureka/
+#虽然这个配置没有提示但是有用。使用OkHttp替换默认的url请求
+#feign:
+#  httpclient:
+#    enabled: true
+#    connection-timeout: 5000
 #zuul:
 #  routes:
 #    saber-auth:

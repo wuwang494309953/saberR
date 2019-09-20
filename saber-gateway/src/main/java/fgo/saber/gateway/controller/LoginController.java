@@ -1,4 +1,4 @@
-package fgo.saber.zuul.controller;
+package fgo.saber.gateway.controller;
 
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.base.statuscode.CommonStatusCode;
@@ -26,11 +26,9 @@ import javax.validation.constraints.NotBlank;
 @Validated
 public class LoginController {
 
-
     @PostMapping("/in")
     public JsonResult loginIn(@NotBlank(message = "用户名 不能为空") String username,
                               @NotBlank(message = "密码 不能为空") String password) {
-
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
         Subject currentUser = SecurityUtils.getSubject();
         try {

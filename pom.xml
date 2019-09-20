@@ -14,7 +14,8 @@
       	<module>saber-eureka</module>
 		<module>saber-authR</module>
 		<module>saber-test</module>
-	</modules>
+	    <module>saber-gateway</module>
+    </modules>
 
     <properties>
         <java.version>1.8</java.version>

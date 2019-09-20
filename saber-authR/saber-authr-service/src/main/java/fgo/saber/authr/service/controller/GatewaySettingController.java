@@ -46,4 +46,9 @@ public class GatewaySettingController {
         return JsonResult.success("删除配置成功");
     }
 
+    @GetMapping("/all")
+    public JsonResult all() {
+        return JsonResult.success(gatewaySettingService.selectAll());
+    }
+
 }

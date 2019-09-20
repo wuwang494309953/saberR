@@ -53,4 +53,15 @@ public class PermissionController {
         return JsonResult.success("删除权限点成功");
     }
 
+    @GetMapping("/list/{appId}")
+    public JsonResult listWithApp(@PathVariable Long appId) {
+        Permission query = Permission.builder().appId(appId).build();
+        return JsonResult.success(permissionService.select(query));
+    }
+
+    @GetMapping("/list/{appId}/{roleId}")
+    public JsonResult listWithAppAndUser(@PathVariable Long appId, @PathVariable Long roleId) {
+        return JsonResult.success(permissionService.findRolesWithAppAndUserId(appId, roleId));
+    }
+
 }
