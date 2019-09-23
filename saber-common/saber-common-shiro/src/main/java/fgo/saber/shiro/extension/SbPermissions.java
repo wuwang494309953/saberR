@@ -57,7 +57,7 @@ public class SbPermissions {
                 filterManager.createChain(url, chainDefinition);
             }
         } catch (Exception e) {
-            throw new CommonBaseException("shiro缓存刷新失败");
+            throw new CommonBaseException("shiro缓存刷新失败", e);
         }
     }
 

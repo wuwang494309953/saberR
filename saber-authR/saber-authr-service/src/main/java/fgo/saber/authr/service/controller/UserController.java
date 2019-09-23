@@ -53,4 +53,9 @@ public class UserController {
         return JsonResult.success("删除用户成功");
     }
 
+    @GetMapping("/username")
+    public JsonResult findUserWithUsername(String username) {
+        return JsonResult.success(userService.getWithUserName(username));
+    }
+
 }

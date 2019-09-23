@@ -1,14 +1,18 @@
 package fgo.saber.zuul.controller;
 
 import com.google.common.collect.Maps;
+import fgo.saber.authr.cloud.service.DTO.AppShiroSettingDTO;
+import fgo.saber.authr.cloud.service.ShiroSettingCloudService;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.shiro.extension.SbPermissions;
+import fgo.saber.zuul.common.GatewayResultStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -22,11 +26,20 @@ public class PermissionController {
     @Autowired
     public SbPermissions sbPermissions;
 
-    @PostMapping("/refresh")
-    public JsonResult updateFilter() {
+    @Autowired
+    public ShiroSettingCloudService shiroSettingCloudService;
+
+    @PostMapping("/setting/refresh")
+    public JsonResult refresh() {
+        JsonResult<List<AppShiroSettingDTO>> result = shiroSettingCloudService.all();
+
+        if (result.getCode() != 0) {
+            return GatewayResultStatus.PERMISSION_INIT_ERROR;
+        }
         Map<String, String> filterMap = Maps.newLinkedHashMap();
-        filterMap.put("/test1", "perms[test1]");
-        filterMap.put("/login/in", "anon");
+        for (AppShiroSettingDTO shiroSettingDTO : result.getData()) {
+            filterMap.put(shiroSettingDTO.getShiroPath(), shiroSettingDTO.getShiroAuth());
+        }
         //把 admin 设置成不需要拦截
 //        filterMap.put("/**", "authc");
 
@@ -36,7 +49,7 @@ public class PermissionController {
 
     @PostConstruct
     private void init() {
-        this.updateFilter();
+        this.refresh();
     }
 
 }

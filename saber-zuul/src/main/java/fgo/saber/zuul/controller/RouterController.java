@@ -5,6 +5,7 @@ import fgo.saber.zuul.CustomRouteLocator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class RouterController {
     @Qualifier("routeLocator")
     private CustomRouteLocator routeLocator;
 
-    @RequestMapping("/setting/refresh")
+    @PostMapping("/setting/refresh")
     public JsonResult refreshSetting() {
         try {
             routeLocator.manualRefresh();
@@ -35,7 +36,12 @@ public class RouterController {
 
     @PostConstruct
     public void init() {
-        routeLocator.manualRefresh();
+        try {
+            routeLocator.manualRefresh();
+        } catch (Exception e) {
+            log.error("初始化路由配置失败.", e);
+        }
+
     }
 
 }

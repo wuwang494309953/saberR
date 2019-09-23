@@ -61,5 +61,10 @@ public class UserServiceImpl extends AbstBaseService<User> {
 
     }
 
+    public User getWithUserName(String username) {
+        User query = User.builder().username(username).status(1).build();
+        return userMapper.selectOne(query);
+    }
+
 
 }

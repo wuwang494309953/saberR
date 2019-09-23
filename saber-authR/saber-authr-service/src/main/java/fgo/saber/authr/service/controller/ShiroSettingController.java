@@ -46,4 +46,9 @@ public class ShiroSettingController {
         return JsonResult.success("删除Shiro配置成功");
     }
 
+    @GetMapping("/all")
+    public JsonResult all() {
+        return JsonResult.success(shiroSettingService.selectAll());
+    }
+
 }

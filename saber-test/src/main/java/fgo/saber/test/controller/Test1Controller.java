@@ -12,12 +12,17 @@ public class Test1Controller {
 
     @GetMapping("/test1")
     public String test1() {
-        return "hello world 1";
+        return "登录后可以访问";
     }
 
     @GetMapping("/test2")
     public String test2() {
-        return "my test 2";
+        return "需要角色 boy 可以访问";
+    }
+
+    @GetMapping("/test3")
+    public String test3() {
+        return "需要权限点 test1 可以访问";
     }
 
 }
