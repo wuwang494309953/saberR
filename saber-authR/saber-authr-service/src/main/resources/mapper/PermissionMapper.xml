@@ -51,7 +51,7 @@
 		</where>
 	</select>
 
-	<select id="findRolesWithAppAndUserId" resultMap="BaseResultMap">
+	<select id="findRolesWithAppAndRoleId" resultMap="BaseResultMap">
 		select
 		<include refid="Alias_Column_List"><property name="alias" value="p"/></include>
 		from permission p
@@ -59,6 +59,19 @@
 		where rp.role_id = #{roleId}
 		and p.app_id = #{appId}
 		and p.status = 1
+	</select>
+
+	<select id="findRolesWithAppAndRoleIds" resultMap="BaseResultMap">
+		select
+			<include refid="Alias_Column_List"><property name="alias" value="p"/></include>
+		from permission p
+		inner join role_permission rp on rp.permission_id = p.permission_id
+		where p.app_id = #{appId}
+		and p.status = 1
+		and rp.role_id in
+			<foreach collection="roleIds" item="item" index="index" open="(" close=")" separator=",">
+				#{item}
+			</foreach>
 	</select>
 
 </mapper>

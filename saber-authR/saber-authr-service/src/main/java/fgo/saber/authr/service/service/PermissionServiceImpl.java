@@ -2,9 +2,11 @@ package fgo.saber.authr.service.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.google.common.collect.Lists;
 import fgo.saber.authr.service.common.AuthResultStatus;
 import fgo.saber.authr.service.dao.PermissionMapper;
 import fgo.saber.authr.service.model.entity.Permission;
+import fgo.saber.authr.service.model.entity.Role;
 import fgo.saber.authr.service.model.param.PageParam;
 import fgo.saber.authr.service.model.param.PermissionParam;
 import fgo.saber.authr.service.model.vo.PermissionVO;
@@ -18,6 +20,7 @@ import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author zq
@@ -28,6 +31,9 @@ public class PermissionServiceImpl extends AbstBaseService<Permission> {
 
     @Autowired
     private PermissionMapper permissionMapper;
+    
+    @Autowired
+    private RoleServiceImpl roleService;
 
     @Override
     public Mapper<Permission> getDao() {
@@ -62,7 +68,16 @@ public class PermissionServiceImpl extends AbstBaseService<Permission> {
 
     }
 
-    public List<Permission> findRolesWithAppAndUserId(Long appId, Long roleId) {
-        return permissionMapper.findRolesWithAppAndUserId(appId, roleId);
+    public List<Permission> findRolesWithAppAndRoleId(Long appId, Long roleId) {
+        return permissionMapper.findRolesWithAppAndRoleId(appId, roleId);
+    }
+
+    public List<Permission> findRolesWithAppAndUserId(Long appId, Long userId) {
+        List<Role> roles = roleService.findRolesWithAppAndUserId(appId, userId);
+        if (roles.isEmpty()) {
+            return Lists.newArrayList();
+        }
+        List<Long> roleIds = roles.stream().map(Role::getRoleId).collect(Collectors.toList());
+        return permissionMapper.findRolesWithAppAndRoleIds(appId, roleIds);
     }
 }

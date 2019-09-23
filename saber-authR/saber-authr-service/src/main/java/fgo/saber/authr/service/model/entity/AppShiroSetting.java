@@ -47,6 +47,9 @@ public class AppShiroSetting {
     @Column(name = "`shiro_auth`")
     private String shiroAuth;
 
+    @Column(name = "`orders`")
+    private Integer orders;
+
     /**
      * 创建时间
      */

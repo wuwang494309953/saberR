@@ -9,6 +9,7 @@
     <result column="app_id" jdbcType="BIGINT" property="appId" />
     <result column="shiro_path" jdbcType="VARCHAR" property="shiroPath" />
     <result column="shiro_auth" jdbcType="VARCHAR" property="shiroAuth" />
+	  <result column="orders" jdbcType="NUMERIC" property="orders" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
@@ -21,11 +22,11 @@
     <!--
       WARNING - @mbg.generated
     -->
-    setting_id, app_id, shiro_path, shiro_auth, create_time, update_time
+    setting_id, app_id, shiro_path, shiro_auth, orders, create_time, update_time
   </sql>
 
 	<sql id="Alias_Column_List">
-		${alias}.setting_id, ${alias}.app_id, ${alias}.shiro_path, ${alias}.shiro_auth, ${alias}.create_time, ${alias}.update_time
+		${alias}.setting_id, ${alias}.app_id, ${alias}.shiro_path, ${alias}.shiro_auth, ${alias}.orders, ${alias}.create_time, ${alias}.update_time
 	</sql>
 
 	<select id="getAppShiroSettingNav" resultMap="AppNameResultMap">
@@ -46,5 +47,12 @@
 				ass.app_id = #{appId}
 			</if>
 		</where>
+	</select>
+
+	<select id="getAllShiroSettingOrderByOrders" resultMap="BaseResultMap">
+		select
+			<include refid="Base_Column_List"></include>
+		from app_shiro_setting
+		order by orders desc
 	</select>
 </mapper>

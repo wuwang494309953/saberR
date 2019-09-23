@@ -13,6 +13,8 @@ public class SbUser {
 
     private Long userId;
 
+    private Long appId;
+
     private String username;
 
     private String password;

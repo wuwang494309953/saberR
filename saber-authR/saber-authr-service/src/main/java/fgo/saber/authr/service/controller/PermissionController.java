@@ -60,8 +60,13 @@ public class PermissionController {
     }
 
     @GetMapping("/list/{appId}/{roleId}")
-    public JsonResult listWithAppAndUser(@PathVariable Long appId, @PathVariable Long roleId) {
-        return JsonResult.success(permissionService.findRolesWithAppAndUserId(appId, roleId));
+    public JsonResult listWithAppAndRole(@PathVariable Long appId, @PathVariable Long roleId) {
+        return JsonResult.success(permissionService.findRolesWithAppAndRoleId(appId, roleId));
+    }
+
+    @GetMapping("/list/user/{appId}/{userId}")
+    public JsonResult listWithAppAndUser(@PathVariable Long appId, @PathVariable Long userId) {
+        return JsonResult.success(permissionService.findRolesWithAppAndUserId(appId, userId));
     }
 
 }

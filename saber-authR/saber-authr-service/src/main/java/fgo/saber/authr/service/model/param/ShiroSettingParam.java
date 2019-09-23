@@ -23,4 +23,7 @@ public class ShiroSettingParam {
     @NotBlank(message = "shiroAuth不能为空")
     private String shiroAuth;
 
+    @NotNull(message = "orders不能为空")
+    private Integer orders;
+
 }

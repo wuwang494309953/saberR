@@ -11,4 +11,5 @@ public interface AppShiroSettingMapper extends Mapper<AppShiroSetting> {
 
     List<AppShiroSettingVO> getAppShiroSettingNav(ShiroSettingParam param);
 
+    List<AppShiroSetting> getAllShiroSettingOrderByOrders();
 }

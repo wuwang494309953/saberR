@@ -48,7 +48,7 @@ public class ShiroSettingController {
 
     @GetMapping("/all")
     public JsonResult all() {
-        return JsonResult.success(shiroSettingService.selectAll());
+        return JsonResult.success(shiroSettingService.getAllSettings());
     }
 
 }

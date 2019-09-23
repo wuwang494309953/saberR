@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author zq
@@ -58,5 +59,9 @@ public class ShiroSettingServiceImpl extends AbstBaseService<AppShiroSetting> {
             appShiroSettingMapper.updateByPrimaryKeySelective(shiroSetting);
         }
 
+    }
+
+    public List<AppShiroSetting> getAllSettings() {
+        return appShiroSettingMapper.getAllShiroSettingOrderByOrders();
     }
 }

@@ -12,6 +12,7 @@ public interface PermissionMapper extends Mapper<Permission> {
 
     List<PermissionVO> getPermissionNav(PermissionParam permissionParam);
 
-    List<Permission> findRolesWithAppAndUserId(@Param("appId") Long appId, @Param("roleId") Long roleId);
+    List<Permission> findRolesWithAppAndRoleId(@Param("appId") Long appId, @Param("roleId") Long roleId);
 
+    List<Permission> findRolesWithAppAndRoleIds(@Param("appId") Long appId, @Param("roleIds") List<Long> roleIds);
 }

@@ -6,6 +6,7 @@ import fgo.saber.authr.cloud.service.ShiroSettingCloudService;
 import fgo.saber.base.json.JsonResult;
 import fgo.saber.shiro.extension.SbPermissions;
 import fgo.saber.zuul.common.GatewayResultStatus;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/permission")
+@Slf4j
 public class PermissionController {
 
     @Autowired
@@ -49,7 +51,11 @@ public class PermissionController {
 
     @PostConstruct
     private void init() {
-        this.refresh();
+        try {
+            this.refresh();
+        } catch (Exception e) {
+            log.error("Shiro权限配置初始化失败.", e);
+        }
     }
 
 }
