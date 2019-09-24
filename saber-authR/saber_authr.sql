@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50726
 File Encoding         : 65001
 
-Date: 2019-09-19 18:46:51
+Date: 2019-09-24 18:44:32
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,8 +32,8 @@ CREATE TABLE `app_gateway_setting` (
 -- ----------------------------
 -- Records of app_gateway_setting
 -- ----------------------------
-INSERT INTO `app_gateway_setting` VALUES ('367074032125882368', '366725073079513088', 'hello', '/**', '2019-09-05 11:42:15', '2019-09-05 11:42:15');
-INSERT INTO `app_gateway_setting` VALUES ('368754752137342976', '367009437944262656', 'saber-auth', '/**', '2019-09-10 03:00:49', '2019-09-10 03:00:49');
+INSERT INTO `app_gateway_setting` VALUES ('368754752137342976', '367009437944262656', 'saber-auth', '/v1/saberAuth/role/list', '2019-09-10 03:00:49', '2019-09-10 03:00:49');
+INSERT INTO `app_gateway_setting` VALUES ('373526224999428096', '373525593102364672', 'saber-test', '/v1/saberTest/**', '2019-09-23 07:00:57', '2019-09-23 07:00:57');
 
 -- ----------------------------
 -- Table structure for app_info
@@ -64,7 +64,8 @@ INSERT INTO `app_info` VALUES ('367009472069120000', '应用8', '6329e138-504a-4
 INSERT INTO `app_info` VALUES ('367009493246160896', '应用9', '1e48b9db-a393-434e-a205-a08d87546033', null, '1', '2019-09-05 07:25:48', '2019-09-05 07:25:48');
 INSERT INTO `app_info` VALUES ('367009508920274944', '应用10', '45cd8343-3550-44d1-a42d-04757fbb0e6f', null, '0', '2019-09-05 07:25:51', '2019-09-05 07:25:51');
 INSERT INTO `app_info` VALUES ('367009522807615488', '应用11', '03a0b306-3a07-4aff-ae95-7de0a7033e21', null, '1', '2019-09-05 07:25:55', '2019-09-05 07:25:55');
-INSERT INTO `app_info` VALUES ('367009628629905408', '应用12', '06e4ee7f-34e2-4de0-bbf6-1fbaaabb0e77', null, '1', '2019-09-05 07:26:20', '2019-09-05 07:26:20');
+INSERT INTO `app_info` VALUES ('367009628629905408', '应用12', '06e4ee7f-34e2-4de0-bbf6-1fbaaabb0e77', 'xxx', '1', '2019-09-05 07:26:20', '2019-09-23 06:54:29');
+INSERT INTO `app_info` VALUES ('373525593102364672', '正式测试应用', '935f55ea-5103-43bb-9d32-f18467bc8a16', '这是一个测试权限点的应用', '1', '2019-09-23 06:58:26', '2019-09-23 06:58:26');
 
 -- ----------------------------
 -- Table structure for app_shiro_setting
@@ -75,6 +76,7 @@ CREATE TABLE `app_shiro_setting` (
   `app_id` bigint(20) NOT NULL COMMENT 'appId',
   `shiro_path` varchar(200) COLLATE utf8mb4_bin NOT NULL COMMENT 'shiro的权限eg.(/test/*,/**)这样的路径',
   `shiro_auth` varchar(200) COLLATE utf8mb4_bin NOT NULL COMMENT 'shiro中的权限。eg(authc,anon)',
+  `orders` int(8) NOT NULL COMMENT '排序。越大的优先级越高',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   PRIMARY KEY (`setting_id`)
@@ -83,17 +85,8 @@ CREATE TABLE `app_shiro_setting` (
 -- ----------------------------
 -- Records of app_shiro_setting
 -- ----------------------------
-INSERT INTO `app_shiro_setting` VALUES ('371064904781803520', '367009493246160896', '/*', 'authc', '2019-09-16 12:00:32', '2019-09-16 12:00:32');
-INSERT INTO `app_shiro_setting` VALUES ('371284899835031552', '367009628629905408', '1', '1x', '2019-09-17 02:34:43', '2019-09-17 02:34:52');
-INSERT INTO `app_shiro_setting` VALUES ('371284973445066752', '367009472069120000', '2', '2', '2019-09-17 02:35:01', '2019-09-17 02:35:01');
-INSERT INTO `app_shiro_setting` VALUES ('371285010984087552', '367009493246160896', '4', '4', '2019-09-17 02:35:10', '2019-09-17 02:35:10');
-INSERT INTO `app_shiro_setting` VALUES ('371285037584363520', '367009522807615488', '5', '5', '2019-09-17 02:35:17', '2019-09-17 02:35:17');
-INSERT INTO `app_shiro_setting` VALUES ('371285060539789312', '367009393367199744', '6', '6', '2019-09-17 02:35:22', '2019-09-17 02:35:22');
-INSERT INTO `app_shiro_setting` VALUES ('371285080164937728', '367009472069120000', '11', '11', '2019-09-17 02:35:27', '2019-09-17 02:35:27');
-INSERT INTO `app_shiro_setting` VALUES ('371285101916598272', '367009472069120000', '12', '12', '2019-09-17 02:35:32', '2019-09-17 02:35:32');
-INSERT INTO `app_shiro_setting` VALUES ('371285139896020992', '366725073079513088', '3', '421', '2019-09-17 02:35:41', '2019-09-17 02:35:41');
-INSERT INTO `app_shiro_setting` VALUES ('371285156740345856', '367009472069120000', '412', '123', '2019-09-17 02:35:45', '2019-09-17 02:35:45');
-INSERT INTO `app_shiro_setting` VALUES ('371285185592963072', '367009522807615488', '41', '1', '2019-09-17 02:35:52', '2019-09-17 02:35:52');
+INSERT INTO `app_shiro_setting` VALUES ('373528160473591808', '373525593102364672', '/v1/saberTest/test2', 'roles[boy]', '10', '2019-09-23 07:08:39', '2019-09-23 09:42:53');
+INSERT INTO `app_shiro_setting` VALUES ('373565496674627584', '373525593102364672', '/v1/saberTest/**', 'authc', '0', '2019-09-23 09:37:00', '2019-09-23 09:42:49');
 
 -- ----------------------------
 -- Table structure for permission
@@ -114,7 +107,8 @@ CREATE TABLE `permission` (
 -- ----------------------------
 -- Records of permission
 -- ----------------------------
-INSERT INTO `permission` VALUES ('371796630785110016', '367009522807615488', '删除用户1', 'delUser', null, '1', '2019-09-18 12:28:09', '2019-09-19 02:54:03');
+INSERT INTO `permission` VALUES ('371796630785110016', '367009437944262656', '删除用户1', 'delUser', null, '1', '2019-09-18 12:28:09', '2019-09-20 02:12:16');
+INSERT INTO `permission` VALUES ('372366489050820608', '367009437944262656', '新增用户', 'addUser', null, '1', '2019-09-20 02:12:34', '2019-09-20 02:12:34');
 
 -- ----------------------------
 -- Table structure for resource
@@ -143,7 +137,7 @@ CREATE TABLE `role` (
   `app_id` bigint(20) NOT NULL COMMENT 'appId',
   `role_name` varchar(50) COLLATE utf8mb4_bin NOT NULL COMMENT '角色名',
   `role_value` varchar(100) COLLATE utf8mb4_bin NOT NULL COMMENT '角色具体值，shiro会用的',
-  `remark` varchar(255) COLLATE utf8mb4_bin NOT NULL COMMENT '备注',
+  `remark` varchar(255) COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
   `status` int(1) NOT NULL COMMENT '0-无效，1-有效',
   `type` int(1) NOT NULL COMMENT '1-普通用户，2-管理员',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -155,6 +149,9 @@ CREATE TABLE `role` (
 -- Records of role
 -- ----------------------------
 INSERT INTO `role` VALUES ('371739451050831872', '367009437944262656', '操作者1', '', '123', '1', '1', '2019-09-18 08:40:57', '2019-09-18 09:03:50');
+INSERT INTO `role` VALUES ('372139927676268544', '367009437944262656', '客户', 'customer', '4213', '1', '1', '2019-09-19 11:12:18', '2019-09-19 11:17:21');
+INSERT INTO `role` VALUES ('372153714617757696', '367009472069120000', 'admin', 'admin', null, '1', '2', '2019-09-19 12:07:05', '2019-09-19 12:07:05');
+INSERT INTO `role` VALUES ('373530436873367552', '373525593102364672', '男孩', 'boy', null, '1', '1', '2019-09-23 07:17:41', '2019-09-23 07:17:41');
 
 -- ----------------------------
 -- Table structure for role_permission
@@ -171,6 +168,24 @@ CREATE TABLE `role_permission` (
 
 -- ----------------------------
 -- Records of role_permission
+-- ----------------------------
+INSERT INTO `role_permission` VALUES ('372427131887693824', '371739451050831872', '371796630785110016', '2019-09-20 06:13:33', '2019-09-20 06:13:33');
+
+-- ----------------------------
+-- Table structure for role_resource
+-- ----------------------------
+DROP TABLE IF EXISTS `role_resource`;
+CREATE TABLE `role_resource` (
+  `role_resource_id` bigint(20) NOT NULL,
+  `role_id` bigint(20) NOT NULL COMMENT '角色id',
+  `resource_id` bigint(20) NOT NULL COMMENT '资源id',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`role_resource_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
+
+-- ----------------------------
+-- Records of role_resource
 -- ----------------------------
 
 -- ----------------------------
@@ -195,6 +210,7 @@ CREATE TABLE `user` (
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES ('371758728285925376', '367009437944262656', '494309953@qq.com', '13187169066', 'saber', '123456', '1234', '1', '2019-09-18 09:57:33', '2019-09-18 09:57:33');
+INSERT INTO `user` VALUES ('373530692902072320', '373525593102364672', '494309954@qq.com', '13187169064', 'archar', '123456', '', '1', '2019-09-23 07:18:43', '2019-09-23 07:18:43');
 
 -- ----------------------------
 -- Table structure for user_role
@@ -212,3 +228,4 @@ CREATE TABLE `user_role` (
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
+INSERT INTO `user_role` VALUES ('373530717338087424', '373530436873367552', '373530692902072320', '2019-09-23 07:18:49', '2019-09-23 07:18:49');
