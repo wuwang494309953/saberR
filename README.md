@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="320" src="./图床/logo-github.png">
+  <img width="120" src="./图床/logo-github.png">
 </p>
 
 ![](./图床/title.PNG)
