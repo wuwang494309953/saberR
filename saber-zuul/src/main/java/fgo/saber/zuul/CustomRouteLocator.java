@@ -11,6 +11,9 @@ import org.springframework.cloud.netflix.zuul.filters.ZuulProperties;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
@@ -21,6 +24,12 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
 
     @Autowired
     private AppGatewaySettingCloudService appGatewaySettingCloudService;
+
+    private static final ScheduledExecutorService SCHEDULED_EXECUTOR_SERVICE = Executors.newSingleThreadScheduledExecutor();
+
+    public void init() {
+        initScheduled();
+    }
 
     public CustomRouteLocator(String servletPath, ZuulProperties properties) {
         super(servletPath, properties);
@@ -52,10 +61,18 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
         doRefresh();
     }
 
+    public void initScheduled() {
+        SCHEDULED_EXECUTOR_SERVICE.scheduleAtFixedRate(() -> manualRefresh(), 10, 10, TimeUnit.SECONDS);
+    }
+
     public void manualRefresh() {
         lock.lock();
-        this.zuulRouterMap = this.getSettingMap();
-        doRefresh();
+//        zuulRouterMap.hashCode()
+        Map<String, ZuulProperties.ZuulRoute> settingMap = this.getSettingMap();
+        if (this.zuulRouterMap == null || !this.zuulRouterMap.equals(settingMap)) {
+            this.zuulRouterMap = settingMap;
+            doRefresh();
+        }
         lock.unlock();
     }
 

@@ -24,7 +24,7 @@ public class ZuulApplication {
         SpringApplication.run(ZuulApplication.class, args);
     }
 
-    @Bean
+    @Bean(initMethod = "init")
     public CustomRouteLocator routeLocator() {
         return new CustomRouteLocator("", this.zuulProperties);
     }
