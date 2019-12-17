@@ -26,7 +26,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>log/${appname}/info.%d.log</fileNamePattern>
+            <fileNamePattern>/www/logs/${appname}/info.%d.log</fileNamePattern>
             <!-- 保留最近30天的日志文件 -->
             <maxHistory>30</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>
@@ -46,7 +46,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--路径-->
-            <fileNamePattern>log/${appname}/error.%d.log</fileNamePattern>
+            <fileNamePattern>/www/logs/${appname}/error.%d.log</fileNamePattern>
             <!-- 保留最近30天的日志文件 -->
             <maxHistory>30</maxHistory>
             <totalSizeCap>3GB</totalSizeCap>

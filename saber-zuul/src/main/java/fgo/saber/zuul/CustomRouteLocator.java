@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import fgo.saber.authr.cloud.service.AppGatewaySettingCloudService;
 import fgo.saber.authr.cloud.service.DTO.AppGatewaySettingDTO;
 import fgo.saber.base.json.JsonResult;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.zuul.filters.RefreshableRouteLocator;
 import org.springframework.cloud.netflix.zuul.filters.SimpleRouteLocator;
@@ -20,6 +21,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author zq
  * @date 2019/8/16
  */
+@Slf4j
 public class CustomRouteLocator extends SimpleRouteLocator implements RefreshableRouteLocator {
 
     @Autowired
@@ -68,12 +70,18 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
     public void manualRefresh() {
         lock.lock();
 //        zuulRouterMap.hashCode()
-        Map<String, ZuulProperties.ZuulRoute> settingMap = this.getSettingMap();
-        if (this.zuulRouterMap == null || !this.zuulRouterMap.equals(settingMap)) {
-            this.zuulRouterMap = settingMap;
-            doRefresh();
+        try {
+            Map<String, ZuulProperties.ZuulRoute> settingMap = this.getSettingMap();
+            if (this.zuulRouterMap == null || !this.zuulRouterMap.equals(settingMap)) {
+                this.zuulRouterMap = settingMap;
+                doRefresh();
+            }
+        } catch (Exception e) {
+            log.error("路由配置刷新失败", e);
+        } finally {
+            lock.unlock();
         }
-        lock.unlock();
+
     }
 
     private Map<String, ZuulProperties.ZuulRoute> getSettingMap() {

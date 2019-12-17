@@ -1,0 +1,10 @@
+eureka:
+  instance:
+    hostname: eureka-docker
+    home-page-url: http://${eureka.hostname}:${server.port}
+  client:
+    service-url:
+      defaultZone: http://localhost:8501/eureka/
+    register-with-eureka: false
+    fetch-registry: false
+

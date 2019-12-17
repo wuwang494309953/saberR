@@ -9,6 +9,6 @@ eureka:
     home-page-url: http://${eureka.hostname}:${server.port}
   client:
     service-url:
-      defaultZone: http://peer1:8501/eureka/, http://peer2:8502/eureka/
+      defaultZone: http://peer1:8501/eureka/,http://peer2:8502/eureka/,http://peer3:8503/eureka/
   server:
     renewal-percent-threshold: 0.49

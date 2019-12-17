@@ -138,6 +138,41 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>1.8.0</version>
+				<configuration>
+					<from>
+						<image>192.168.187.201:5000/jdk/openjdk:12</image>
+					</from>
+					<to>
+						<image>192.168.187.201:5000/${project.groupId}/${project.artifactId}</image>
+						<tags>
+							<tag>${project.version}</tag>
+						</tags>
+						<!--<image> registry.hub.docker.com/494309953/jibtest</image>
+						<auth>
+							<username>494309953</username>
+							<password>19940301.</password>
+						</auth>-->
+					</to>
+					<container>
+						<jvmFlags>
+							<jvmFlag>-Xmx256m</jvmFlag>
+							<jvmFlag>-Xdebug</jvmFlag>
+						</jvmFlags>
+						<args>
+							<arg>--spring.profiles.active=docker</arg>
+						</args>
+						<useCurrentTimestamp>true</useCurrentTimestamp>
+					</container>
+					<allowInsecureRegistries>
+						true
+					</allowInsecureRegistries>
+				</configuration>
+			</plugin>
         </plugins>
 
     </build>
