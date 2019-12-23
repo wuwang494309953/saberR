@@ -47,6 +47,12 @@ public class CustomRouteLocator extends SimpleRouteLocator implements Refreshabl
         route.setId("saber-authr");
         routeMap.put(route.getPath(), route);
 
+        ZuulProperties.ZuulRoute route1 = new ZuulProperties.ZuulRoute();
+        route1.setPath("/v1/gateway/**");
+        route1.setServiceId("saber-zuul");
+        route1.setId("saber-zuul");
+        routeMap.put(route1.getPath(), route1);
+
         if (zuulRouterMap != null) {
             routeMap.putAll(zuulRouterMap);
         }

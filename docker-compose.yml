@@ -1,17 +1,21 @@
 version: '3'
 services:
   eureka-docker:
-    image: 192.168.187.201:5000/fgo.saber/saber-eureka:latest
+    image: 119.23.29.13/saber/saber-eureka:latest
     ports:
       - '8501:8501'
     volumes:
       - '/www/logs:/www/logs'
   saber-auth:
-    image: 192.168.187.201:5000/fgo.saber/saber-authr-service:latest
+    image: 119.23.29.13/saber/saber-authr-service:latest
+    depends_on:
+      - eureka-docker
     volumes:
       - '/www/logs:/www/logs'
   zuul:
-    image: 192.168.187.201:5000/fgo.saber/saber-zuul:latest
+    image: 119.23.29.13/saber/saber-zuul:latest
+    depends_on:
+      - saber-auth
     ports:
       - '8070:8080'
     volumes:
