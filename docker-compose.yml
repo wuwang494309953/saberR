@@ -26,3 +26,10 @@ services:
       - zuul
     ports:
       - '8071:80'
+  saber-mysql:
+    image: 119.23.29.13/saber/saber-mysql:v1
+    restart: always
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
