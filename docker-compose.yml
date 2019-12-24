@@ -27,9 +27,13 @@ services:
     ports:
       - '8071:80'
   saber-mysql:
-    image: 119.23.29.13/saber/saber-mysql:v1
+    image: 119.23.29.13/saber/saber-mysql:v2
     restart: always
     ports:
       - '3306:3306'
+    command: [
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci'
+    ]
     environment:
       MYSQL_ROOT_PASSWORD: 123456
