@@ -20,3 +20,9 @@ services:
       - '8070:8080'
     volumes:
       - '/www/logs:/www/logs'
+  web:
+    image: 119.23.29.13/saber/saber-web:v2
+    depends_on:
+      - zuul
+    ports:
+      - '8071:80'

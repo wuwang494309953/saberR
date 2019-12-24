@@ -13,6 +13,10 @@ File Encoding         : 65001
 Date: 2019-09-25 20:27:59
 */
 
+create database saber_authr CHARACTER SET utf8 COLLATE utf8_general_ci;
+
+use saber_authr;
+
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
