@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import fgo.saber.shiro.extension.SbPermissions;
 import fgo.saber.shiro.filter.SaberFormAuthenticationFilter;
 import fgo.saber.shiro.filter.SaberPermissionsAuthorizationFilter;
+import fgo.saber.shiro.filter.SaberRolesAuthorizationFilter;
 import fgo.saber.shiro.realm.SaberRealm;
 import fgo.saber.shiro.sessionmanager.SaberWebSessionManager;
 import org.apache.shiro.cache.MemoryConstrainedCacheManager;
@@ -44,6 +45,7 @@ public class ShiroConfigure {
         Map<String, Filter> filterMap = Maps.newLinkedHashMap();
         filterMap.put("authc", new SaberFormAuthenticationFilter());
         filterMap.put("perms", new SaberPermissionsAuthorizationFilter());
+        filterMap.put("roles", new SaberRolesAuthorizationFilter());
         bean.setFilters(filterMap);
 
         /*Map<String, String> filterChainDefinitionMap = Maps.newLinkedHashMap();
