@@ -20,4 +20,8 @@ public class CommonStatusCode {
 
     public final static JsonResult USER_NOT_EXIST = JsonResult.fail(1101, "用户不存在");
 
+    public final static JsonResult USER_NOT_ROLES = JsonResult.fail(1102, "用户没有角色");
+
+    public final static JsonResult USER_NOT_PERMISSION = JsonResult.fail(1103, "用户没有权限");
+
 }

@@ -4,13 +4,10 @@ import fgo.saber.base.statuscode.CommonStatusCode;
 import fgo.saber.util.JsonMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.filter.authz.RolesAuthorizationFilter;
-import org.apache.shiro.web.util.WebUtils;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -34,15 +31,9 @@ public class SaberRolesAuthorizationFilter extends RolesAuthorizationFilter {
             response.getWriter().write(JsonMapper.obj2String(CommonStatusCode.NOT_LOGIN));
             return false;
         } else {
-            // If subject is known but not authorized, redirect to the unauthorized URL if there is one
-            // If no unauthorized URL is specified, just return an unauthorized HTTP status code
-            String unauthorizedUrl = getUnauthorizedUrl();
-            //SHIRO-142 - ensure that redirect _or_ error code occurs - both cannot happen due to response commit:
-            if (StringUtils.hasText(unauthorizedUrl)) {
-                WebUtils.issueRedirect(request, response, unauthorizedUrl);
-            } else {
-                WebUtils.toHttp(response).sendError(HttpServletResponse.SC_UNAUTHORIZED);
-            }
+            response.setCharacterEncoding("UTF-8");
+            response.setContentType("application/json");
+            response.getWriter().write(JsonMapper.obj2String(CommonStatusCode.USER_NOT_ROLES));
         }
         return false;
     }
